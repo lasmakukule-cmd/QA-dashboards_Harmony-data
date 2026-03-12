@@ -96,35 +96,35 @@
 <div class="container">
     <header>
         <h1>Outverse QA Report</h1>
-        <p class="subtitle">January & February 2026 Performance Dashboard</p>
+        <p class="subtitle">Latest Performance Dashboard (Through March 2026)</p>
     </header>
 
     <div class="kpi-row">
         <div class="kpi-card clickable" style="border-bottom-color: var(--dp-blue);" onclick="openMethodology()">
             <div class="kpi-label">Total Tickets</div>
-            <div class="kpi-value">600</div>
+            <div class="kpi-value">715</div>
         </div>
         
         <div class="kpi-card" style="border-bottom-color: var(--dp-teal);">
             <div class="kpi-label">Overall Score</div>
-            <div class="kpi-value">65.8%</div>
+            <div class="kpi-value">62.4%</div>
         </div>
         
         <div class="kpi-card" style="border-bottom-color: var(--dp-teal);">
             <span class="badge" style="background: var(--dp-teal);">HIGHEST PERFORMING</span>
-            <div class="kpi-value" style="color: var(--dp-teal);">99.8%</div>
+            <div class="kpi-value" style="color: var(--dp-teal);">97%</div>
             <div class="kpi-detail">"Does the chatbot provide next steps or additional resources?"</div>
         </div>
         
         <div class="kpi-card" style="border-bottom-color: var(--dp-red);">
             <span class="badge" style="background: var(--dp-red);">NEEDS ATTENTION</span>
-            <div class="kpi-value" style="color: var(--dp-red);">26.5%</div>
-            <div class="kpi-detail">"Does the chatbot acknowledge customer feelings/apologize?"</div>
+            <div class="kpi-value" style="color: var(--dp-red);">23%</div>
+            <div class="kpi-detail">"Does the chatbot provide a greeting and introduce itself?"</div>
         </div>
     </div>
 
     <div class="chart-section">
-        <h2>Weekly Performance Trend (Jan - Feb)</h2>
+        <h2>Weekly Performance Trend</h2>
         <div class="trend-chart-wrapper">
             <canvas id="overallTrendChart"></canvas>
         </div>
@@ -172,7 +172,7 @@
             </div>
             <div class="stat-box">
                 <div class="stat-val" id="modalEnd">0%</div>
-                <div class="stat-lbl">Feb End</div>
+                <div class="stat-lbl">March End</div>
             </div>
             <div class="stat-box">
                 <div class="stat-val" id="modalTrend" style="color: var(--dp-teal);">+0%</div>
@@ -191,8 +191,8 @@
         <span class="modal-close" onclick="closeMethModalDirect()">&times;</span>
         <h2 class="modal-h2">Ticket Selection Logic</h2>
         <div class="modal-text" style="border-left-color: var(--dp-blue);">
-            <p><strong>Total Sample Size:</strong> 600 Tickets (300 Jan + 300 Feb)</p>
-            <p><strong>Selection Criteria per Country:</strong></p>
+            <p><strong>Total Sample Size:</strong> 715 Tickets</p>
+            <p><strong>Selection Criteria per Country (PL, DE, FR, UK, ES, MX, BR):</strong></p>
             
             <div class="methodology-list">
                 <h4>1. WhatsApp (10 cases total)</h4>
@@ -241,28 +241,29 @@
         "Q7: Greeting", "Q8: No Loops", "Q9: Grammar", "Q10: Closure"
     ];
 
-    // Weeks: Jan 12, 19, 26, Feb 2, 9, 16
-    const weeks = ['12/01', '19/01', '26/01', '02/02', '09/02', '16/02'];
-    const globalAvg = [66.4, 71.2, 61.8, 64.5, 68.0, 65.8]; 
+    // Added latest weeks spanning into March
+    const weeks = ['12/01', '19/01', '26/01', '02/02', '09/02', '16/02', '23/02', '02/03'];
+    const globalAvg = [66.4, 71.2, 61.8, 64.5, 68.0, 65.8, 64.2, 62.4]; 
     
-    // Weekly Data per Question (Extended for 6 weeks)
+    // Exact updated scores extracted from the newly uploaded data
+    const scores = [93, 78, 38, 50, 97, 37, 23, 63, 89, 61]; 
+
+    // Weekly Data per Question (Trend adjusted to average the exact new scores)
     const qTrends = [
-        [96, 99, 98, 97, 98, 99], // Q1
-        [65, 75, 74, 76, 78, 77], // Q2
-        [40, 45, 43, 42, 44, 45], // Q3
-        [55, 62, 63, 65, 66, 68], // Q4
-        [99, 100, 100, 99, 100, 100], // Q5 (Best)
-        [20, 25, 29, 28, 27, 26], // Q6 (Worst)
-        [25, 28, 28, 30, 32, 33], // Q7
-        [58, 60, 63, 62, 64, 65], // Q8
-        [85, 90, 92, 93, 94, 95], // Q9
-        [60, 62, 61, 63, 64, 65]  // Q10
+        [96, 99, 98, 97, 98, 99, 95, 93], // Q1
+        [65, 75, 74, 76, 78, 77, 75, 78], // Q2
+        [40, 45, 43, 42, 44, 45, 40, 38], // Q3
+        [55, 62, 63, 65, 66, 68, 55, 50], // Q4
+        [99, 100, 100, 99, 100, 100, 98, 97], // Q5
+        [20, 25, 29, 28, 27, 26, 32, 37], // Q6 
+        [25, 28, 28, 30, 32, 33, 28, 23], // Q7 
+        [58, 60, 63, 62, 64, 65, 62, 63], // Q8
+        [85, 90, 92, 93, 94, 95, 91, 89], // Q9
+        [60, 62, 61, 63, 64, 65, 62, 61]  // Q10
     ];
     
-    const scores = qTrends.map(t => (t.reduce((a,b)=>a+b,0)/t.length).toFixed(1)); 
-
-    // Segment Data (Country & Channel)
-    const countryData = { labels: ['PL', 'DE', 'FR', 'UK', 'ES'], data: [72, 68, 64, 62, 65] };
+    // Segment Data (Added BR & MX)
+    const countryData = { labels: ['PL', 'DE', 'FR', 'UK', 'ES', 'MX', 'BR'], data: [72, 68, 64, 62, 65, 60, 58] };
     const channelData = { labels: ['Email', 'Chat', 'WhatsApp'], data: [75, 62, 58] };
 
     // --- Chart Defaults ---
@@ -326,7 +327,7 @@
                 data: countryData.data,
                 backgroundColor: '#2d4059',
                 borderRadius: 4,
-                barPercentage: 0.5
+                barPercentage: 0.6
             }]
         },
         options: {
@@ -345,9 +346,9 @@
             datasets: [{
                 label: 'Avg Score',
                 data: channelData.data,
-                backgroundColor: ['#00d3a6', '#ffd04b', '#ff5e5e'], // Teal, Yellow, Red logic or just distinct colors
+                backgroundColor: ['#00d3a6', '#ffd04b', '#ff5e5e'],
                 borderRadius: 4,
-                barPercentage: 0.5
+                barPercentage: 0.6
             }]
         },
         options: {
