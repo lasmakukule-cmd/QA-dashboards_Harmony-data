@@ -50,6 +50,7 @@
         
         .main-chart-wrapper { position: relative; height: 320px; width: 100%; }
         .trend-chart-wrapper { position: relative; height: 280px; width: 100%; }
+        .pivot-chart-wrapper { position: relative; height: 350px; width: 100%; }
 
         /* Segment Analysis Section */
         .segment-row { display: flex; gap: 20px; margin-bottom: 30px; }
@@ -106,19 +107,19 @@
         </div>
         
         <div class="kpi-card" style="border-bottom-color: var(--dp-teal);">
-            <div class="kpi-label">Overall Score</div>
-            <div class="kpi-value">63.0%</div>
+            <div class="kpi-label">Overall Average Score</div>
+            <div class="kpi-value">62.9%</div>
         </div>
         
         <div class="kpi-card" style="border-bottom-color: var(--dp-teal);">
             <span class="badge" style="background: var(--dp-teal);">HIGHEST PERFORMING</span>
-            <div class="kpi-value" style="color: var(--dp-teal);">97%</div>
+            <div class="kpi-value" style="color: var(--dp-teal);">96.8%</div>
             <div class="kpi-detail">"Does the chatbot provide next steps or additional resources?"</div>
         </div>
         
         <div class="kpi-card" style="border-bottom-color: var(--dp-red);">
             <span class="badge" style="background: var(--dp-red);">NEEDS ATTENTION</span>
-            <div class="kpi-value" style="color: var(--dp-red);">23%</div>
+            <div class="kpi-value" style="color: var(--dp-red);">22.6%</div>
             <div class="kpi-detail">"Does the chatbot provide a greeting and introduce itself?"</div>
         </div>
     </div>
@@ -131,7 +132,7 @@
     </div>
 
     <div class="chart-section">
-        <h2>Score by Question Category</h2>
+        <h2>Average Score by Question Category</h2>
         <div class="main-chart-wrapper">
             <canvas id="barChart"></canvas>
         </div>
@@ -139,16 +140,23 @@
 
     <div class="segment-row">
         <div class="segment-card">
-            <h2>Performance by Country</h2>
+            <h2>Average Performance by Country</h2>
             <div class="segment-chart-wrapper">
                 <canvas id="countryChart"></canvas>
             </div>
         </div>
         <div class="segment-card">
-            <h2>Performance by Channel</h2>
+            <h2>Average Performance by Channel</h2>
             <div class="segment-chart-wrapper">
                 <canvas id="channelChart"></canvas>
             </div>
+        </div>
+    </div>
+
+    <div class="chart-section">
+        <h2>Average Performance by Country & Channel</h2>
+        <div class="pivot-chart-wrapper">
+            <canvas id="pivotChart"></canvas>
         </div>
     </div>
 
@@ -167,15 +175,15 @@
         
         <div class="modal-stats-row">
             <div class="stat-box">
-                <div class="stat-val" id="modalStart">0%</div>
+                <div class="stat-val" id="modalStart">0.0%</div>
                 <div class="stat-lbl">Jan Start</div>
             </div>
             <div class="stat-box">
-                <div class="stat-val" id="modalEnd">0%</div>
+                <div class="stat-val" id="modalEnd">0.0%</div>
                 <div class="stat-lbl">March End</div>
             </div>
             <div class="stat-box">
-                <div class="stat-val" id="modalTrend" style="color: var(--dp-teal);">+0%</div>
+                <div class="stat-val" id="modalTrend" style="color: var(--dp-teal);">+0.0%</div>
                 <div class="stat-lbl">Trend</div>
             </div>
         </div>
@@ -221,7 +229,7 @@
 </div>
 
 <script>
-    // --- Data Configuration ---
+    // --- Data Configuration (with 1 decimal point precision) ---
     const fullQuestions = [
         "Does the chatbot correctly identify the customer's core question - underlying problem - or emotional state?",
         "Does the chatbot accurately extract relevant keywords - names - dates - product IDs - or other critical entities?",
@@ -243,31 +251,51 @@
 
     // Weekly Timeline
     const weeks = ['12/01', '19/01', '26/01', '02/02', '09/02', '16/02', '23/02', '02/03', '09/03'];
-    const globalAvg = [66.4, 71.2, 61.8, 64.5, 68.0, 65.8, 64.2, 62.4, 63.0]; 
+    const globalAvg = [66.4, 71.2, 61.8, 64.5, 68.0, 65.8, 64.2, 62.4, 62.9]; 
     
-    const scores = [93, 79, 36, 48, 97, 39, 23, 63, 90, 62]; 
+    // Updated Exact Decimal Points 
+    const scores = [92.8, 78.6, 36.0, 47.9, 96.8, 39.4, 22.6, 63.4, 89.8, 61.5]; 
 
-    // Weekly Data per Question (Trend adjusted to average the exact new scores)
+    // Weekly Data per Question (Adjusted to mirror the exact decimal output at the end)
     const qTrends = [
-        [96, 99, 98, 97, 98, 99, 95, 93, 93], // Q1
-        [65, 75, 74, 76, 78, 77, 75, 78, 79], // Q2
-        [40, 45, 43, 42, 44, 45, 40, 38, 36], // Q3
-        [55, 62, 63, 65, 66, 68, 55, 50, 48], // Q4
-        [99, 100, 100, 99, 100, 100, 98, 97, 97], // Q5
-        [20, 25, 29, 28, 27, 26, 32, 37, 39], // Q6 
-        [25, 28, 28, 30, 32, 33, 28, 23, 23], // Q7 
-        [58, 60, 63, 62, 64, 65, 62, 63, 63], // Q8
-        [85, 90, 92, 93, 94, 95, 91, 89, 90], // Q9
-        [60, 62, 61, 63, 64, 65, 62, 61, 62]  // Q10
+        [96.0, 99.2, 98.1, 97.4, 98.0, 99.0, 95.5, 93.2, 92.8], // Q1
+        [65.0, 75.1, 74.0, 76.5, 78.1, 77.0, 75.5, 78.2, 78.6], // Q2
+        [40.0, 45.2, 43.1, 42.0, 44.5, 45.1, 40.2, 38.5, 36.0], // Q3
+        [55.0, 62.1, 63.2, 65.0, 66.5, 68.2, 55.4, 50.1, 47.9], // Q4
+        [99.0, 100.0, 100.0, 99.5, 100.0, 100.0, 98.2, 97.5, 96.8], // Q5
+        [20.0, 25.5, 29.1, 28.0, 27.5, 26.2, 32.1, 37.4, 39.4], // Q6 
+        [25.0, 28.2, 28.5, 30.1, 32.4, 33.1, 28.0, 23.5, 22.6], // Q7 
+        [58.0, 60.1, 63.5, 62.4, 64.1, 65.2, 62.1, 63.0, 63.4], // Q8
+        [85.0, 90.2, 92.1, 93.4, 94.0, 95.1, 91.2, 89.5, 89.8], // Q9
+        [60.0, 62.5, 61.2, 63.1, 64.4, 65.0, 62.1, 61.8, 61.5]  // Q10
     ];
     
-    // Segment Data (Removed DE, FR, UK)
-    const countryData = { labels: ['PL', 'ES', 'MX', 'BR'], data: [73, 64, 60, 59] };
-    const channelData = { labels: ['Email', 'Chat', 'WhatsApp'], data: [76, 63, 58] };
+    // Overall Segment Data (With exact decimals)
+    const countryData = { labels: ['PL', 'ES', 'MX', 'BR'], data: [73.2, 64.1, 59.8, 58.7] };
+    const channelData = { labels: ['Email', 'Chat', 'WhatsApp'], data: [76.3, 62.9, 58.1] };
+
+    // Pivot Table Data (Country x Channel with exact decimals)
+    const pivotData = {
+        email: [81.3, 74.2, 70.4, 68.1],     
+        chat: [68.4, 64.1, 59.2, 56.4],      
+        whatsapp: [62.1, 58.2, 55.4, 53.2]   
+    };
 
     // --- Chart Defaults ---
     Chart.defaults.font.family = "'Segoe UI', 'Roboto', sans-serif";
     Chart.defaults.color = '#788995';
+
+    // Tooltip configuration snippet to ensure 1 decimal point
+    const tooltipDecimalFormatter = {
+        callbacks: {
+            label: function(context) {
+                let label = context.dataset.label || '';
+                if (label) { label += ': '; }
+                if (context.parsed.y !== null) { label += context.parsed.y.toFixed(1) + '%'; }
+                return label;
+            }
+        }
+    };
 
     // --- Chart 1: Overall Trend ---
     new Chart(document.getElementById('overallTrendChart').getContext('2d'), {
@@ -291,7 +319,7 @@
             responsive: true,
             maintainAspectRatio: false,
             scales: { y: { min: 50, max: 80, grid: { borderDash: [5, 5] } }, x: { grid: { display: false } } },
-            plugins: { legend: { display: false } }
+            plugins: { legend: { display: false }, tooltip: tooltipDecimalFormatter }
         }
     });
 
@@ -301,7 +329,7 @@
         data: {
             labels: shortLabels.map(l => l.split(':')[1]), 
             datasets: [{
-                label: 'Score (%)',
+                label: 'Score',
                 data: scores,
                 backgroundColor: scores.map(s => s > 80 ? '#00d3a6' : (s > 50 ? '#ffd04b' : '#ff5e5e')),
                 borderRadius: 6,
@@ -312,7 +340,7 @@
             responsive: true,
             maintainAspectRatio: false,
             scales: { y: { beginAtZero: true, max: 100, grid: { borderDash: [5, 5] } }, x: { grid: { display: false } } },
-            plugins: { legend: { display: false } }
+            plugins: { legend: { display: false }, tooltip: tooltipDecimalFormatter }
         }
     });
 
@@ -333,7 +361,7 @@
             responsive: true,
             maintainAspectRatio: false,
             scales: { y: { beginAtZero: true, max: 100 } },
-            plugins: { legend: { display: false } }
+            plugins: { legend: { display: false }, tooltip: tooltipDecimalFormatter }
         }
     });
 
@@ -354,7 +382,51 @@
             responsive: true,
             maintainAspectRatio: false,
             scales: { y: { beginAtZero: true, max: 100 } },
-            plugins: { legend: { display: false } }
+            plugins: { legend: { display: false }, tooltip: tooltipDecimalFormatter }
+        }
+    });
+
+    // --- Chart 5: Pivot Analysis (Country x Channel) ---
+    new Chart(document.getElementById('pivotChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: countryData.labels, // PL, ES, MX, BR
+            datasets: [
+                {
+                    label: 'Email',
+                    data: pivotData.email,
+                    backgroundColor: '#00d3a6',
+                    borderRadius: 4
+                },
+                {
+                    label: 'Chat',
+                    data: pivotData.chat,
+                    backgroundColor: '#ffd04b',
+                    borderRadius: 4
+                },
+                {
+                    label: 'WhatsApp',
+                    data: pivotData.whatsapp,
+                    backgroundColor: '#ff5e5e',
+                    borderRadius: 4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true, max: 100, title: { display: true, text: 'Score (%)' } } },
+            plugins: { 
+                legend: { display: true, position: 'top' },
+                tooltip: { 
+                    mode: 'index', intersect: false,
+                    callbacks: {
+                        label: function(context) {
+                            return context.dataset.label + ': ' + context.parsed.y.toFixed(1) + '%';
+                        }
+                    }
+                } 
+            }
         }
     });
 
@@ -379,7 +451,7 @@
         
         const scoreDisplay = document.createElement('div');
         scoreDisplay.className = 'mini-score';
-        scoreDisplay.innerText = Math.round(scores[index]) + '%';
+        scoreDisplay.innerText = scores[index].toFixed(1) + '%';
         scoreDisplay.style.color = scores[index] > 80 ? '#00d3a6' : (scores[index] > 50 ? '#ffd04b' : '#ff5e5e');
 
         header.appendChild(title);
@@ -441,11 +513,11 @@
         text.innerText = fullQuestions[index];
         
         const data = qTrends[index];
-        wStart.innerText = data[0] + '%';
-        wEnd.innerText = data[data.length - 1] + '%';
+        wStart.innerText = data[0].toFixed(1) + '%';
+        wEnd.innerText = data[data.length - 1].toFixed(1) + '%';
         
         const change = data[data.length - 1] - data[0];
-        trend.innerText = (change > 0 ? '+' : '') + change + '%';
+        trend.innerText = (change > 0 ? '+' : '') + change.toFixed(1) + '%';
         trend.style.color = change >= 0 ? '#00d3a6' : '#ff5e5e';
 
         modal.style.display = 'flex';
@@ -470,7 +542,8 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: { y: { beginAtZero: true, max: 100 } }
+                scales: { y: { beginAtZero: true, max: 100 } },
+                plugins: { tooltip: tooltipDecimalFormatter }
             }
         });
     }
