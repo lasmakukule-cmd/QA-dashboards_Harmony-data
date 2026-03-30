@@ -102,12 +102,12 @@
     <div class="kpi-row">
         <div class="kpi-card clickable" style="border-bottom-color: var(--dp-blue);" onclick="openMethodology()">
             <div class="kpi-label">Total Tickets</div>
-            <div class="kpi-value">715</div>
+            <div class="kpi-value">831</div>
         </div>
         
         <div class="kpi-card" style="border-bottom-color: var(--dp-teal);">
             <div class="kpi-label">Overall Score</div>
-            <div class="kpi-value">62.4%</div>
+            <div class="kpi-value">63.0%</div>
         </div>
         
         <div class="kpi-card" style="border-bottom-color: var(--dp-teal);">
@@ -191,7 +191,7 @@
         <span class="modal-close" onclick="closeMethModalDirect()">&times;</span>
         <h2 class="modal-h2">Ticket Selection Logic</h2>
         <div class="modal-text" style="border-left-color: var(--dp-blue);">
-            <p><strong>Total Sample Size:</strong> 715 Tickets</p>
+            <p><strong>Total Sample Size:</strong> 831 Tickets</p>
             <p><strong>Selection Criteria per Country (PL, DE, FR, UK, ES, MX, BR):</strong></p>
             
             <div class="methodology-list">
@@ -241,30 +241,29 @@
         "Q7: Greeting", "Q8: No Loops", "Q9: Grammar", "Q10: Closure"
     ];
 
-    // Added latest weeks spanning into March
-    const weeks = ['12/01', '19/01', '26/01', '02/02', '09/02', '16/02', '23/02', '02/03'];
-    const globalAvg = [66.4, 71.2, 61.8, 64.5, 68.0, 65.8, 64.2, 62.4]; 
+    // Weekly Timeline
+    const weeks = ['12/01', '19/01', '26/01', '02/02', '09/02', '16/02', '23/02', '02/03', '09/03'];
+    const globalAvg = [66.4, 71.2, 61.8, 64.5, 68.0, 65.8, 64.2, 62.4, 63.0]; 
     
-    // Exact updated scores extracted from the newly uploaded data
-    const scores = [93, 78, 38, 50, 97, 37, 23, 63, 89, 61]; 
+    const scores = [93, 79, 36, 48, 97, 39, 23, 63, 90, 62]; 
 
     // Weekly Data per Question (Trend adjusted to average the exact new scores)
     const qTrends = [
-        [96, 99, 98, 97, 98, 99, 95, 93], // Q1
-        [65, 75, 74, 76, 78, 77, 75, 78], // Q2
-        [40, 45, 43, 42, 44, 45, 40, 38], // Q3
-        [55, 62, 63, 65, 66, 68, 55, 50], // Q4
-        [99, 100, 100, 99, 100, 100, 98, 97], // Q5
-        [20, 25, 29, 28, 27, 26, 32, 37], // Q6 
-        [25, 28, 28, 30, 32, 33, 28, 23], // Q7 
-        [58, 60, 63, 62, 64, 65, 62, 63], // Q8
-        [85, 90, 92, 93, 94, 95, 91, 89], // Q9
-        [60, 62, 61, 63, 64, 65, 62, 61]  // Q10
+        [96, 99, 98, 97, 98, 99, 95, 93, 93], // Q1
+        [65, 75, 74, 76, 78, 77, 75, 78, 79], // Q2
+        [40, 45, 43, 42, 44, 45, 40, 38, 36], // Q3
+        [55, 62, 63, 65, 66, 68, 55, 50, 48], // Q4
+        [99, 100, 100, 99, 100, 100, 98, 97, 97], // Q5
+        [20, 25, 29, 28, 27, 26, 32, 37, 39], // Q6 
+        [25, 28, 28, 30, 32, 33, 28, 23, 23], // Q7 
+        [58, 60, 63, 62, 64, 65, 62, 63, 63], // Q8
+        [85, 90, 92, 93, 94, 95, 91, 89, 90], // Q9
+        [60, 62, 61, 63, 64, 65, 62, 61, 62]  // Q10
     ];
     
-    // Segment Data (Added BR & MX)
-    const countryData = { labels: ['PL', 'DE', 'FR', 'UK', 'ES', 'MX', 'BR'], data: [72, 68, 64, 62, 65, 60, 58] };
-    const channelData = { labels: ['Email', 'Chat', 'WhatsApp'], data: [75, 62, 58] };
+    // Segment Data
+    const countryData = { labels: ['PL', 'DE', 'FR', 'UK', 'ES', 'MX', 'BR'], data: [73, 68, 65, 62, 64, 60, 59] };
+    const channelData = { labels: ['Email', 'Chat', 'WhatsApp'], data: [76, 63, 58] };
 
     // --- Chart Defaults ---
     Chart.defaults.font.family = "'Segoe UI', 'Roboto', sans-serif";
