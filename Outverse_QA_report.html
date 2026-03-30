@@ -192,7 +192,7 @@
         <h2 class="modal-h2">Ticket Selection Logic</h2>
         <div class="modal-text" style="border-left-color: var(--dp-blue);">
             <p><strong>Total Sample Size:</strong> 831 Tickets</p>
-            <p><strong>Selection Criteria per Country (PL, DE, FR, UK, ES, MX, BR):</strong></p>
+            <p><strong>Selection Criteria per Country (PL, ES, MX, BR):</strong></p>
             
             <div class="methodology-list">
                 <h4>1. WhatsApp (10 cases total)</h4>
@@ -261,8 +261,8 @@
         [60, 62, 61, 63, 64, 65, 62, 61, 62]  // Q10
     ];
     
-    // Segment Data
-    const countryData = { labels: ['PL', 'DE', 'FR', 'UK', 'ES', 'MX', 'BR'], data: [73, 68, 65, 62, 64, 60, 59] };
+    // Segment Data (Removed DE, FR, UK)
+    const countryData = { labels: ['PL', 'ES', 'MX', 'BR'], data: [73, 64, 60, 59] };
     const channelData = { labels: ['Email', 'Chat', 'WhatsApp'], data: [76, 63, 58] };
 
     // --- Chart Defaults ---
