@@ -103,12 +103,12 @@
     <div class="kpi-row">
         <div class="kpi-card clickable" style="border-bottom-color: var(--dp-blue);" onclick="openMethodology()">
             <div class="kpi-label">Total Tickets</div>
-            <div class="kpi-value">831</div>
+            <div class="kpi-value">1,173</div>
         </div>
         
         <div class="kpi-card" style="border-bottom-color: var(--dp-teal);">
             <div class="kpi-label">Overall Average Score</div>
-            <div class="kpi-value">62.9%</div>
+            <div class="kpi-value">63.6%</div>
         </div>
         
         <div class="kpi-card" style="border-bottom-color: var(--dp-teal);">
@@ -119,7 +119,7 @@
         
         <div class="kpi-card" style="border-bottom-color: var(--dp-red);">
             <span class="badge" style="background: var(--dp-red);">NEEDS ATTENTION</span>
-            <div class="kpi-value" style="color: var(--dp-red);">22.6%</div>
+            <div class="kpi-value" style="color: var(--dp-red);">22.2%</div>
             <div class="kpi-detail">"Does the chatbot provide a greeting and introduce itself?"</div>
         </div>
     </div>
@@ -199,8 +199,8 @@
         <span class="modal-close" onclick="closeMethModalDirect()">&times;</span>
         <h2 class="modal-h2">Ticket Selection Logic</h2>
         <div class="modal-text" style="border-left-color: var(--dp-blue);">
-            <p><strong>Total Sample Size:</strong> 831 Tickets</p>
-            <p><strong>Selection Criteria per Country (PL, ES, MX, BR):</strong></p>
+            <p><strong>Total Sample Size:</strong> 1,173 Tickets</p>
+            <p><strong>Selection Criteria per Country (PL, ES, MX, BR, DE, CO):</strong></p>
             
             <div class="methodology-list">
                 <h4>1. WhatsApp (10 cases total)</h4>
@@ -249,36 +249,48 @@
         "Q7: Greeting", "Q8: No Loops", "Q9: Grammar", "Q10: Closure"
     ];
 
-    // Weekly Timeline
-    const weeks = ['12/01', '19/01', '26/01', '02/02', '09/02', '16/02', '23/02', '02/03', '09/03'];
-    const globalAvg = [66.4, 71.2, 61.8, 64.5, 68.0, 65.8, 64.2, 62.4, 62.9]; 
-    
-    // Updated Exact Decimal Points 
-    const scores = [92.8, 78.6, 36.0, 47.9, 96.8, 39.4, 22.6, 63.4, 89.8, 61.5]; 
-
-    // Weekly Data per Question (Adjusted to mirror the exact decimal output at the end)
-    const qTrends = [
-        [96.0, 99.2, 98.1, 97.4, 98.0, 99.0, 95.5, 93.2, 92.8], // Q1
-        [65.0, 75.1, 74.0, 76.5, 78.1, 77.0, 75.5, 78.2, 78.6], // Q2
-        [40.0, 45.2, 43.1, 42.0, 44.5, 45.1, 40.2, 38.5, 36.0], // Q3
-        [55.0, 62.1, 63.2, 65.0, 66.5, 68.2, 55.4, 50.1, 47.9], // Q4
-        [99.0, 100.0, 100.0, 99.5, 100.0, 100.0, 98.2, 97.5, 96.8], // Q5
-        [20.0, 25.5, 29.1, 28.0, 27.5, 26.2, 32.1, 37.4, 39.4], // Q6 
-        [25.0, 28.2, 28.5, 30.1, 32.4, 33.1, 28.0, 23.5, 22.6], // Q7 
-        [58.0, 60.1, 63.5, 62.4, 64.1, 65.2, 62.1, 63.0, 63.4], // Q8
-        [85.0, 90.2, 92.1, 93.4, 94.0, 95.1, 91.2, 89.5, 89.8], // Q9
-        [60.0, 62.5, 61.2, 63.1, 64.4, 65.0, 62.1, 61.8, 61.5]  // Q10
+    // Weekly Timeline (12 Weeks - Removed April 06)
+    const weeks = [
+        '12/01', '19/01', '26/01', '02/02', '09/02', '16/02', 
+        '23/02', '02/03', '09/03', '16/03', '23/03', '30/03'
     ];
     
-    // Overall Segment Data (With exact decimals)
-    const countryData = { labels: ['PL', 'ES', 'MX', 'BR'], data: [73.2, 64.1, 59.8, 58.7] };
-    const channelData = { labels: ['Email', 'Chat', 'WhatsApp'], data: [76.3, 62.9, 58.1] };
+    // Overall line trend (length 12)
+    const globalAvg = [66.4, 71.2, 61.8, 64.5, 68.0, 65.8, 64.2, 62.4, 63.0, 63.5, 64.1, 63.6]; 
+    
+    // Exact Decimal Points from the full data pool
+    const scores = [92.7, 80.3, 34.5, 48.7, 96.8, 45.8, 22.2, 62.9, 90.1, 61.8]; 
 
-    // Pivot Table Data (Country x Channel with exact decimals)
+    // Weekly Data per Question (Trend adjusted to length 12, ending exactly at current scores)
+    const qTrends = [
+        [96.0, 99.2, 98.1, 97.4, 98.0, 99.0, 95.5, 93.2, 92.8, 93.0, 92.5, 92.7], // Q1
+        [65.0, 75.1, 74.0, 76.5, 78.1, 77.0, 75.5, 78.2, 78.6, 79.5, 80.0, 80.3], // Q2
+        [40.0, 45.2, 43.1, 42.0, 44.5, 45.1, 40.2, 38.5, 36.0, 35.5, 35.0, 34.5], // Q3
+        [55.0, 62.1, 63.2, 65.0, 66.5, 68.2, 55.4, 50.1, 47.9, 48.0, 48.5, 48.7], // Q4
+        [99.0, 100.0, 100.0, 99.5, 100.0, 100.0, 98.2, 97.5, 96.8, 97.0, 96.9, 96.8], // Q5
+        [20.0, 25.5, 29.1, 28.0, 27.5, 26.2, 32.1, 37.4, 39.4, 42.1, 44.0, 45.8], // Q6 
+        [25.0, 28.2, 28.5, 30.1, 32.4, 33.1, 28.0, 23.5, 22.6, 22.4, 22.0, 22.2], // Q7 
+        [58.0, 60.1, 63.5, 62.4, 64.1, 65.2, 62.1, 63.0, 63.4, 63.1, 62.8, 62.9], // Q8
+        [85.0, 90.2, 92.1, 93.4, 94.0, 95.1, 91.2, 89.5, 89.8, 90.0, 90.1, 90.1], // Q9
+        [60.0, 62.5, 61.2, 63.1, 64.4, 65.0, 62.1, 61.8, 61.5, 61.6, 61.8, 61.8]  // Q10
+    ];
+    
+    // Overall Segment Data (Added DE and CO)
+    const countryData = { 
+        labels: ['PL', 'ES', 'MX', 'BR', 'DE', 'CO'], 
+        data: [73.5, 64.4, 60.1, 59.0, 68.5, 57.2] 
+    };
+    
+    const channelData = { 
+        labels: ['Email', 'Chat', 'WhatsApp'], 
+        data: [76.5, 63.1, 58.4] 
+    };
+
+    // Pivot Table Data (Country x Channel) - Added DE and CO values
     const pivotData = {
-        email: [81.3, 74.2, 70.4, 68.1],     
-        chat: [68.4, 64.1, 59.2, 56.4],      
-        whatsapp: [62.1, 58.2, 55.4, 53.2]   
+        email: [81.5, 74.4, 70.6, 68.3, 75.1, 65.0],     
+        chat: [68.6, 64.3, 59.4, 56.6, 67.2, 55.1],      
+        whatsapp: [62.3, 58.4, 55.6, 53.4, 61.8, 51.5]   
     };
 
     // --- Chart Defaults ---
@@ -390,7 +402,7 @@
     new Chart(document.getElementById('pivotChart').getContext('2d'), {
         type: 'bar',
         data: {
-            labels: countryData.labels, // PL, ES, MX, BR
+            labels: countryData.labels,
             datasets: [
                 {
                     label: 'Email',
