@@ -115,14 +115,14 @@
         <div class="kpi-card" style="border-bottom-color: var(--dp-teal);">
             <span class="badge" style="background: var(--dp-teal);">BEST PERFORMING</span>
             <div class="kpi-value" style="color: var(--dp-teal);">96.8%</div>
-            <div class="kpi-label" style="margin-bottom:0; font-size: 0.8em; color: var(--dp-blue);">Q5</div>
+            <div class="kpi-label" style="margin-bottom:0; font-size: 0.8em; color: var(--dp-blue);">Q5: Next Steps</div>
             <div class="kpi-detail">"Did the chatbot provide any next steps or additional resources during the conversation?"</div>
         </div>
         
         <div class="kpi-card" style="border-bottom-color: var(--dp-red);">
             <span class="badge" style="background: var(--dp-red);">NEEDS ATTENTION</span>
             <div class="kpi-value" style="color: var(--dp-red);">22.2%</div>
-            <div class="kpi-label" style="margin-bottom:0; font-size: 0.8em; color: var(--dp-blue);">Q7</div>
+            <div class="kpi-label" style="margin-bottom:0; font-size: 0.8em; color: var(--dp-blue);">Q7: Greeting</div>
             <div class="kpi-detail">"Does the chatbot provide a greeting and introduce itself and the company?"</div>
         </div>
     </div>
@@ -246,8 +246,18 @@
         "Does the chatbot use a proper closure for the interaction - offering additional assistance - and using a warm and sincere goodbye - or clearly state that it will forward the conversation to an agent?"
     ];
 
+    // Updated with descriptive buckets
     const shortLabels = [
-        "Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10"
+        "Q1: Core Question", 
+        "Q2: Keywords", 
+        "Q3: Clarification", 
+        "Q4: Direct Answer", 
+        "Q5: Next Steps", 
+        "Q6: Empathy", 
+        "Q7: Greeting", 
+        "Q8: Avoids Loops", 
+        "Q9: Grammar", 
+        "Q10: Closure"
     ];
 
     // Weekly Timeline (12 Weeks)
