@@ -41,8 +41,8 @@
 
         .kpi-value { font-size: 2.5em; font-weight: 800; color: var(--dp-blue); margin-bottom: 5px; line-height: 1; }
         .kpi-label { font-size: 0.85em; color: var(--dp-gray); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 10px;}
-        .kpi-detail { font-size: 0.9em; color: var(--dp-blue); font-weight: 500; line-height: 1.4; padding: 0 5px; }
-        .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 700; color: #fff; margin-bottom: 10px; }
+        .kpi-detail { font-size: 0.85em; color: var(--dp-gray); font-weight: 500; line-height: 1.4; padding: 0 5px; margin-top: 8px;}
+        .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 700; color: #fff; margin-bottom: 10px; text-transform: uppercase;}
 
         /* Chart Sections */
         .chart-section { background: var(--dp-white); padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); margin-bottom: 30px; }
@@ -65,7 +65,7 @@
         .mini-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); border-color: var(--dp-teal); }
         .mini-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
         .mini-title { font-size: 0.95em; font-weight: 700; color: var(--dp-blue); line-height: 1.4; }
-        .mini-score { font-size: 1.2em; font-weight: 800; color: var(--dp-teal); }
+        .mini-score { font-size: 1.2em; font-weight: 800; color: var(--dp-blue); }
         .mini-chart-wrapper { position: relative; height: 120px; width: 100%; }
         .click-hint { font-size: 0.75em; color: var(--dp-gray); text-align: center; margin-top: 10px; opacity: 0; transition: opacity 0.2s; }
         .mini-card:hover .click-hint { opacity: 1; }
@@ -80,10 +80,6 @@
         .modal-h2 { color: var(--dp-blue); font-size: 1.6em; margin-top: 0; margin-bottom: 10px; }
         .modal-text { font-size: 1em; color: #555; line-height: 1.6; margin-bottom: 30px; background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid var(--dp-teal); }
         
-        .methodology-list h4 { margin-top: 15px; margin-bottom: 5px; color: var(--dp-blue); }
-        .methodology-list ul { margin-top: 5px; padding-left: 20px; }
-        .methodology-list li { margin-bottom: 5px; }
-
         .modal-stats-row { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
         .stat-box { text-align: center; }
         .stat-val { font-size: 1.5em; font-weight: bold; color: var(--dp-blue); }
@@ -97,7 +93,7 @@
 <div class="container">
     <header>
         <h1>Outverse QA Report</h1>
-        <p class="subtitle">Latest Performance Dashboard (Through March 2026)</p>
+        <p class="subtitle">Latest Performance Dashboard</p>
     </header>
 
     <div class="kpi-row">
@@ -108,19 +104,21 @@
         
         <div class="kpi-card" style="border-bottom-color: var(--dp-teal);">
             <div class="kpi-label">Overall Average Score</div>
-            <div class="kpi-value">63.6%</div>
+            <div class="kpi-value">64.0%</div>
         </div>
         
         <div class="kpi-card" style="border-bottom-color: var(--dp-teal);">
-            <span class="badge" style="background: var(--dp-teal);">HIGHEST PERFORMING</span>
+            <span class="badge" style="background: var(--dp-teal);">BEST PERFORMING</span>
             <div class="kpi-value" style="color: var(--dp-teal);">96.8%</div>
-            <div class="kpi-detail">"Does the chatbot provide next steps or additional resources?"</div>
+            <div class="kpi-label" style="margin-bottom:0; font-size: 0.8em; color: var(--dp-blue);">Q5</div>
+            <div class="kpi-detail">"Did the chatbot provide any next steps or additional resources during the conversation?"</div>
         </div>
         
         <div class="kpi-card" style="border-bottom-color: var(--dp-red);">
             <span class="badge" style="background: var(--dp-red);">NEEDS ATTENTION</span>
             <div class="kpi-value" style="color: var(--dp-red);">22.2%</div>
-            <div class="kpi-detail">"Does the chatbot provide a greeting and introduce itself?"</div>
+            <div class="kpi-label" style="margin-bottom:0; font-size: 0.8em; color: var(--dp-blue);">Q7</div>
+            <div class="kpi-detail">"Does the chatbot provide a greeting and introduce itself and the company?"</div>
         </div>
     </div>
 
@@ -132,7 +130,7 @@
     </div>
 
     <div class="chart-section">
-        <h2>Average Score by Question Category</h2>
+        <h2>Average Score by Question</h2>
         <div class="main-chart-wrapper">
             <canvas id="barChart"></canvas>
         </div>
@@ -160,7 +158,7 @@
         </div>
     </div>
 
-    <h2 class="grid-header">Detailed Question Analysis (Click to Expand)</h2>
+    <h2 class="grid-header">Interactive Question Grid (Click to Expand)</h2>
     <div class="trend-grid" id="trendGrid">
         </div>
     
@@ -176,15 +174,15 @@
         <div class="modal-stats-row">
             <div class="stat-box">
                 <div class="stat-val" id="modalStart">0.0%</div>
-                <div class="stat-lbl">Jan Start</div>
+                <div class="stat-lbl">Start Score</div>
             </div>
             <div class="stat-box">
                 <div class="stat-val" id="modalEnd">0.0%</div>
-                <div class="stat-lbl">March End</div>
+                <div class="stat-lbl">End Score</div>
             </div>
             <div class="stat-box">
                 <div class="stat-val" id="modalTrend" style="color: var(--dp-teal);">+0.0%</div>
-                <div class="stat-lbl">Trend</div>
+                <div class="stat-lbl">Trend Change</div>
             </div>
         </div>
 
@@ -197,110 +195,86 @@
 <div class="modal-overlay" id="methModalOverlay" onclick="closeMethModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
         <span class="modal-close" onclick="closeMethModalDirect()">&times;</span>
-        <h2 class="modal-h2">Ticket Selection Logic</h2>
+        <h2 class="modal-h2">Methodology & Sample Selection</h2>
         <div class="modal-text" style="border-left-color: var(--dp-blue);">
             <p><strong>Total Sample Size:</strong> 1,173 Tickets</p>
-            <p><strong>Selection Criteria per Country (PL, ES, MX, BR, DE, CO):</strong></p>
-            
-            <div class="methodology-list">
-                <h4>1. WhatsApp (10 cases total)</h4>
-                <ul>
-                    <li><strong>5 "Long" Conversations:</strong> Chats with >10 back-and-forth messages.</li>
-                    <li><strong>3 "Drop-offs":</strong> User stopped replying before resolution.</li>
-                    <li><strong>2 Random:</strong> Any resolved case.</li>
-                </ul>
-
-                <h4>2. Chat (10 cases total)</h4>
-                <ul>
-                    <li><strong>5 "Long" Conversations:</strong> Chats with >10 back-and-forth messages.</li>
-                    <li><strong>3 "Long Inputs":</strong> Customer wrote complex queries/paragraphs.</li>
-                    <li><strong>2 Random:</strong> Any resolved case.</li>
-                </ul>
-
-                <h4>3. Email (10 cases total)</h4>
-                <ul>
-                    <li><strong>5 "Re-opens":</strong> Customer replied again after AI solution.</li>
-                    <li><strong>3 "Multi-question":</strong> Emails containing multiple questions.</li>
-                    <li><strong>2 Random:</strong> Any resolved email.</li>
-                </ul>
-            </div>
+            <p><strong>Evaluated Countries:</strong> PL, ES, MX, BR, DE, CO</p>
+            <p style="margin-top:20px; font-size: 0.9em; color: var(--dp-gray);">
+                This report represents the comprehensive Quality Assurance audit across the specified countries and support channels (Email, Chat, WhatsApp) over a 12-week monitoring period.
+            </p>
         </div>
     </div>
 </div>
 
 <script>
-    // --- Data Configuration (with 1 decimal point precision) ---
+    // --- Data Configuration ---
     const fullQuestions = [
         "Does the chatbot correctly identify the customer's core question - underlying problem - or emotional state?",
-        "Does the chatbot accurately extract relevant keywords - names - dates - product IDs - or other critical entities?",
+        "Does the chatbot accurately extract relevant keywords - names - dates - product IDs - or other critical entities from the query?",
         "Does the chatbot ask clarifying questions to understand the customer's issue?",
         "Did the chatbot provide a direct answer to each of the customer's questions or requests?",
         "Did the chatbot provide any next steps or additional resources during the conversation?",
-        "Does the chatbot use language that acknowledges customer feelings such as frustration/happiness? Does it include apologies?",
+        "Does the chatbot use language that acknowledges customer feelings such as frustration - happiness - or concern? Does it include any apologies?",
         "Does the chatbot provide a greeting and introduce itself and the company?",
         "Does the chatbot avoid getting stuck in repetitive loops or asking the same question multiple times?",
         "Did the chatbot use correct grammar and punctuation in its responses?",
-        "Does the chatbot use a proper closure for the interaction - offering additional assistance - and using a warm goodbye?"
+        "Does the chatbot use a proper closure for the interaction - offering additional assistance - and using a warm and sincere goodbye - or clearly state that it will forward the conversation to an agent?"
     ];
 
     const shortLabels = [
-        "Q1: Identification", "Q2: Entity Extraction", "Q3: Clarifying Qs", 
-        "Q4: Direct Answer", "Q5: Next Steps", "Q6: Empathy", 
-        "Q7: Greeting", "Q8: No Loops", "Q9: Grammar", "Q10: Closure"
+        "Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10"
     ];
 
-    // Weekly Timeline (12 Weeks - Removed April 06)
+    // Weekly Timeline (12 Weeks)
     const weeks = [
         '12/01', '19/01', '26/01', '02/02', '09/02', '16/02', 
         '23/02', '02/03', '09/03', '16/03', '23/03', '30/03'
     ];
     
-    // Overall line trend (length 12)
-    const globalAvg = [66.4, 71.2, 61.8, 64.5, 68.0, 65.8, 64.2, 62.4, 63.0, 63.5, 64.1, 63.6]; 
+    // Overall line trend
+    const globalAvg = [62.9, 68.8, 59.5, 61.4, 65.6, 62.7, 61.8, 62.1, 63.4, 65.6, 66.4, 65.7]; 
     
-    // Exact Decimal Points from the full data pool
-    const scores = [92.7, 80.3, 34.5, 48.7, 96.8, 45.8, 22.2, 62.9, 90.1, 61.8]; 
+    // Average Score by Question
+    const scores = [92.7, 80.3, 34.5, 48.7, 96.8, 45.8, 22.2, 62.9, 90.4, 65.9]; 
 
-    // Weekly Data per Question (Trend adjusted to length 12, ending exactly at current scores)
+    // Weekly Data per Question (12 weeks)
     const qTrends = [
-        [96.0, 99.2, 98.1, 97.4, 98.0, 99.0, 95.5, 93.2, 92.8, 93.0, 92.5, 92.7], // Q1
-        [65.0, 75.1, 74.0, 76.5, 78.1, 77.0, 75.5, 78.2, 78.6, 79.5, 80.0, 80.3], // Q2
-        [40.0, 45.2, 43.1, 42.0, 44.5, 45.1, 40.2, 38.5, 36.0, 35.5, 35.0, 34.5], // Q3
-        [55.0, 62.1, 63.2, 65.0, 66.5, 68.2, 55.4, 50.1, 47.9, 48.0, 48.5, 48.7], // Q4
-        [99.0, 100.0, 100.0, 99.5, 100.0, 100.0, 98.2, 97.5, 96.8, 97.0, 96.9, 96.8], // Q5
-        [20.0, 25.5, 29.1, 28.0, 27.5, 26.2, 32.1, 37.4, 39.4, 42.1, 44.0, 45.8], // Q6 
-        [25.0, 28.2, 28.5, 30.1, 32.4, 33.1, 28.0, 23.5, 22.6, 22.4, 22.0, 22.2], // Q7 
-        [58.0, 60.1, 63.5, 62.4, 64.1, 65.2, 62.1, 63.0, 63.4, 63.1, 62.8, 62.9], // Q8
-        [85.0, 90.2, 92.1, 93.4, 94.0, 95.1, 91.2, 89.5, 89.8, 90.0, 90.1, 90.1], // Q9
-        [60.0, 62.5, 61.2, 63.1, 64.4, 65.0, 62.1, 61.8, 61.5, 61.6, 61.8, 61.8]  // Q10
+        [99.1, 98.9, 94.4, 97.8, 94.4, 86.2, 86.9, 88.2, 89.9, 92.2, 92.0, 92.6], // Q1
+        [62.7, 85.6, 81.0, 70.7, 81.2, 84.0, 79.2, 79.8, 83.1, 83.0, 83.3, 86.8], // Q2
+        [54.5, 50.0, 22.2, 39.6, 38.9, 28.7, 38.4, 30.4, 20.8, 34.6, 32.5, 25.6], // Q3
+        [55.2, 72.6, 52.2, 47.8, 65.6, 46.6, 27.8, 32.0, 32.7, 58.1, 43.5, 50.8], // Q4
+        [100.0, 100.0, 97.8, 100.0, 98.9, 94.3, 93.1, 94.2, 94.1, 97.1, 97.4, 95.9], // Q5
+        [13.9, 36.8, 25.6, 33.3, 34.4, 45.3, 51.8, 56.4, 58.0, 63.5, 59.1, 61.2], // Q6 
+        [44.0, 18.9, 13.3, 21.3, 21.1, 16.9, 23.3, 20.2, 18.4, 14.4, 26.3, 22.1], // Q7 
+        [51.7, 64.2, 67.4, 58.3, 62.2, 68.6, 70.6, 61.0, 67.7, 64.1, 66.1, 55.8], // Q8
+        [82.6, 94.7, 92.1, 93.5, 93.3, 89.5, 83.3, 88.2, 92.9, 95.1, 88.6, 92.4], // Q9
+        [65.5, 66.3, 48.9, 51.2, 65.6, 66.7, 63.2, 70.6, 76.5, 53.8, 75.7, 73.9]  // Q10
     ];
     
-    // Overall Segment Data
+    // Average Performance by Country
     const countryData = { 
-        labels: ['PL', 'ES', 'MX', 'BR', 'DE', 'CO'], 
-        data: [64.0, 59.4, 62.8, 65.6, 68.7, 53.3] 
+        labels: ['PL', 'DE', 'ES', 'MX', 'BR', 'CO'], 
+        data: [64.0, 68.7, 59.4, 62.8, 65.6, 53.3] 
     };
     
-    // Exact overall values from the screenshot's Grand Total row
+    // Average Performance by Channel
     const channelData = { 
         labels: ['Email', 'Chat', 'WhatsApp'], 
         data: [67.0, 58.0, 60.0] 
     };
 
-    // --- NEW: Exact Pivot Table Data from Screenshot ---
-    // Note: Using null where no data exists so the chart correctly leaves it blank.
-    // Order corresponds to countryData.labels: ['PL', 'ES', 'MX', 'BR', 'DE', 'CO']
+    // Grouped Bar (Pivot Table Data)
     const pivotData = {
-        email:    [67.0, 68.2, 66.8, 65.5, 68.7, 53.3],
-        chat:     [61.0, 50.5, 61.5, 70.0, null, null], // CO & DE have no Chat
-        whatsapp: [null, 59.5, 60.2, null, null, null]  // DE, BR, PL & CO have no WhatsApp
+        email:    [67.0, 68.7, 68.2, 66.8, 65.5, 53.3],
+        chat:     [61.0, null, 50.5, 61.5, 70.0, null],
+        whatsapp: [null, null, 59.5, 60.2, null, null]
     };
 
-    // --- Chart Defaults ---
+    // --- Chart Global Config ---
     Chart.defaults.font.family = "'Segoe UI', 'Roboto', sans-serif";
     Chart.defaults.color = '#788995';
 
-    // Tooltip configuration snippet to ensure 1 decimal point
+    // Formatter to force 1 decimal place
     const tooltipDecimalFormatter = {
         callbacks: {
             label: function(context) {
@@ -318,7 +292,7 @@
         data: {
             labels: weeks,
             datasets: [{
-                label: 'Global Score',
+                label: 'Global Avg',
                 data: globalAvg,
                 borderColor: '#00d3a6',
                 backgroundColor: 'rgba(0, 211, 166, 0.1)',
@@ -333,20 +307,20 @@
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            scales: { y: { min: 50, max: 80, grid: { borderDash: [5, 5] } }, x: { grid: { display: false } } },
+            scales: { y: { min: 50, max: 75, grid: { borderDash: [5, 5] } }, x: { grid: { display: false } } },
             plugins: { legend: { display: false }, tooltip: tooltipDecimalFormatter }
         }
     });
 
-    // --- Chart 2: Main Bar Chart ---
+    // --- Chart 2: Main Bar Chart (By Question) ---
     new Chart(document.getElementById('barChart').getContext('2d'), {
         type: 'bar',
         data: {
-            labels: shortLabels.map(l => l.split(':')[1]), 
+            labels: shortLabels, 
             datasets: [{
                 label: 'Score',
                 data: scores,
-                backgroundColor: scores.map(s => s > 80 ? '#00d3a6' : (s > 50 ? '#ffd04b' : '#ff5e5e')),
+                backgroundColor: '#2d4059',
                 borderRadius: 6,
                 barPercentage: 0.6
             }]
@@ -367,7 +341,7 @@
             datasets: [{
                 label: 'Avg Score',
                 data: countryData.data,
-                backgroundColor: '#2d4059',
+                backgroundColor: '#00d3a6',
                 borderRadius: 4,
                 barPercentage: 0.6
             }]
@@ -388,7 +362,7 @@
             datasets: [{
                 label: 'Avg Score',
                 data: channelData.data,
-                backgroundColor: ['#00d3a6', '#ffd04b', '#ff5e5e'],
+                backgroundColor: '#2d4059',
                 borderRadius: 4,
                 barPercentage: 0.6
             }]
@@ -416,13 +390,13 @@
                 {
                     label: 'Chat',
                     data: pivotData.chat,
-                    backgroundColor: '#ffd04b',
+                    backgroundColor: '#2d4059',
                     borderRadius: 4
                 },
                 {
                     label: 'WhatsApp',
                     data: pivotData.whatsapp,
-                    backgroundColor: '#ff5e5e',
+                    backgroundColor: '#788995',
                     borderRadius: 4
                 }
             ]
@@ -452,13 +426,17 @@
     const gridContainer = document.getElementById('trendGrid');
     let modalChartInstance = null;
 
-    questions = shortLabels; // alias
-
-    questions.forEach((q, index) => {
+    shortLabels.forEach((q, index) => {
         const card = document.createElement('div');
         card.className = 'mini-card';
-        card.onclick = () => openModal(index); // Make clickable
+        card.onclick = () => openModal(index);
         
+        // Calculate Trend (End vs Start)
+        const startScore = qTrends[index][0];
+        const endScore = qTrends[index][qTrends[index].length - 1];
+        const change = endScore - startScore;
+        const trendColor = change >= 0 ? '#00d3a6' : '#ff5e5e'; // Green if pos, Red if neg
+
         // Header
         const header = document.createElement('div');
         header.className = 'mini-header';
@@ -470,7 +448,6 @@
         const scoreDisplay = document.createElement('div');
         scoreDisplay.className = 'mini-score';
         scoreDisplay.innerText = scores[index].toFixed(1) + '%';
-        scoreDisplay.style.color = scores[index] > 80 ? '#00d3a6' : (scores[index] > 50 ? '#ffd04b' : '#ff5e5e');
 
         header.appendChild(title);
         header.appendChild(scoreDisplay);
@@ -491,9 +468,8 @@
 
         gridContainer.appendChild(card);
 
-        // Render Mini Chart
+        // Render Mini Line Chart
         const ctx = canvas.getContext('2d');
-        const color = scores[index] > 80 ? '#00d3a6' : (scores[index] > 50 ? '#ffd04b' : '#ff5e5e');
         
         new Chart(ctx, {
             type: 'line',
@@ -501,7 +477,7 @@
                 labels: weeks,
                 datasets: [{
                     data: qTrends[index],
-                    borderColor: color,
+                    borderColor: trendColor,
                     borderWidth: 2,
                     pointRadius: 0,
                     tension: 0.3
@@ -531,10 +507,13 @@
         text.innerText = fullQuestions[index];
         
         const data = qTrends[index];
-        wStart.innerText = data[0].toFixed(1) + '%';
-        wEnd.innerText = data[data.length - 1].toFixed(1) + '%';
+        const startVal = data[0];
+        const endVal = data[data.length - 1];
+        const change = endVal - startVal;
+
+        wStart.innerText = startVal.toFixed(1) + '%';
+        wEnd.innerText = endVal.toFixed(1) + '%';
         
-        const change = data[data.length - 1] - data[0];
         trend.innerText = (change > 0 ? '+' : '') + change.toFixed(1) + '%';
         trend.style.color = change >= 0 ? '#00d3a6' : '#ff5e5e';
 
@@ -554,7 +533,9 @@
                     borderColor: '#2d4059',
                     backgroundColor: 'rgba(45, 64, 89, 0.1)',
                     fill: true,
-                    tension: 0.3
+                    tension: 0.3,
+                    pointBackgroundColor: '#fff',
+                    pointBorderWidth: 2
                 }]
             },
             options: {
