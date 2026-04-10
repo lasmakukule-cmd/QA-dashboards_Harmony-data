@@ -80,6 +80,11 @@
         .modal-h2 { color: var(--dp-blue); font-size: 1.6em; margin-top: 0; margin-bottom: 10px; }
         .modal-text { font-size: 1em; color: #555; line-height: 1.6; margin-bottom: 30px; background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid var(--dp-teal); }
         
+        /* Methodology specific lists */
+        .methodology-list h4 { margin-top: 15px; margin-bottom: 5px; color: var(--dp-blue); }
+        .methodology-list ul { margin-top: 5px; padding-left: 20px; }
+        .methodology-list li { margin-bottom: 5px; }
+
         .modal-stats-row { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
         .stat-box { text-align: center; }
         .stat-val { font-size: 1.5em; font-weight: bold; color: var(--dp-blue); }
@@ -195,13 +200,33 @@
 <div class="modal-overlay" id="methModalOverlay" onclick="closeMethModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
         <span class="modal-close" onclick="closeMethModalDirect()">&times;</span>
-        <h2 class="modal-h2">Methodology & Sample Selection</h2>
+        <h2 class="modal-h2">Ticket Selection Logic</h2>
         <div class="modal-text" style="border-left-color: var(--dp-blue);">
             <p><strong>Total Sample Size:</strong> 1,173 Tickets</p>
-            <p><strong>Evaluated Countries:</strong> PL, ES, MX, BR, DE, CO</p>
-            <p style="margin-top:20px; font-size: 0.9em; color: var(--dp-gray);">
-                This report represents the comprehensive Quality Assurance audit across the specified countries and support channels (Email, Chat, WhatsApp) over a 12-week monitoring period.
-            </p>
+            <p><strong>Selection Criteria per Country (PL, ES, MX, BR, DE, CO):</strong></p>
+            
+            <div class="methodology-list">
+                <h4>1. WhatsApp (10 cases total)</h4>
+                <ul>
+                    <li><strong>5 "Long" Conversations:</strong> Chats with >10 back-and-forth messages.</li>
+                    <li><strong>3 "Drop-offs":</strong> User stopped replying before resolution.</li>
+                    <li><strong>2 Random:</strong> Any resolved case.</li>
+                </ul>
+
+                <h4>2. Chat (10 cases total)</h4>
+                <ul>
+                    <li><strong>5 "Long" Conversations:</strong> Chats with >10 back-and-forth messages.</li>
+                    <li><strong>3 "Long Inputs":</strong> Customer wrote complex queries/paragraphs.</li>
+                    <li><strong>2 Random:</strong> Any resolved case.</li>
+                </ul>
+
+                <h4>3. Email (10 cases total)</h4>
+                <ul>
+                    <li><strong>5 "Re-opens":</strong> Customer replied again after AI solution.</li>
+                    <li><strong>3 "Multi-question":</strong> Emails containing multiple questions.</li>
+                    <li><strong>2 Random:</strong> Any resolved email.</li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
