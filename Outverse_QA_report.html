@@ -73,12 +73,13 @@
 
         /* Modal (Popup) */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(45, 64, 89, 0.6); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(2px); }
-        .modal-content { background: #fff; padding: 40px; border-radius: 16px; width: 90%; max-width: 650px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: slideUp 0.3s ease-out; max-height: 90vh; overflow-y: auto; }
+        .modal-content { background: #fff; padding: 40px; border-radius: 16px; width: 90%; max-width: 750px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: slideUp 0.3s ease-out; max-height: 90vh; overflow-y: auto; }
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
         .modal-close { position: absolute; top: 20px; right: 20px; font-size: 1.5em; cursor: pointer; color: var(--dp-gray); transition: color 0.2s; }
         .modal-close:hover { color: var(--dp-blue); }
         .modal-h2 { color: var(--dp-blue); font-size: 1.6em; margin-top: 0; margin-bottom: 10px; }
+        .modal-h3 { color: var(--dp-blue); font-size: 1.2em; margin-top: 30px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         .modal-text { font-size: 1em; color: #555; line-height: 1.6; margin-bottom: 30px; background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid var(--dp-teal); }
         
         /* Methodology specific lists */
@@ -192,8 +193,14 @@
             </div>
         </div>
 
-        <div style="height: 200px; width: 100%;">
+        <h3 class="modal-h3" style="margin-top: 0;">Global Trend</h3>
+        <div style="height: 180px; width: 100%;">
             <canvas id="modalChart"></canvas>
+        </div>
+
+        <h3 class="modal-h3">Country Breakdown</h3>
+        <div style="height: 250px; width: 100%;">
+            <canvas id="modalCountryChart"></canvas>
         </div>
     </div>
 </div>
@@ -247,33 +254,20 @@
         "Does the chatbot use a proper closure for the interaction - offering additional assistance - and using a warm and sincere goodbye - or clearly state that it will forward the conversation to an agent?"
     ];
 
-    // Updated with descriptive buckets
     const shortLabels = [
-        "Q1: Core Question", 
-        "Q2: Keywords", 
-        "Q3: Clarification", 
-        "Q4: Direct Answer", 
-        "Q5: Next Steps", 
-        "Q6: Empathy", 
-        "Q7: Greeting", 
-        "Q8: Avoids Loops", 
-        "Q9: Grammar", 
-        "Q10: Closure"
+        "Q1: Core Question", "Q2: Keywords", "Q3: Clarification", "Q4: Direct Answer", 
+        "Q5: Next Steps", "Q6: Empathy", "Q7: Greeting", "Q8: Avoids Loops", 
+        "Q9: Grammar", "Q10: Closure"
     ];
 
-    // Weekly Timeline (12 Weeks)
     const weeks = [
         '12/01', '19/01', '26/01', '02/02', '09/02', '16/02', 
         '23/02', '02/03', '09/03', '16/03', '23/03', '30/03'
     ];
     
-    // Overall line trend
     const globalAvg = [62.9, 68.8, 59.5, 61.4, 65.6, 62.7, 61.8, 62.1, 63.4, 65.6, 66.4, 65.7]; 
-    
-    // Average Score by Question
     const scores = [92.7, 80.3, 34.5, 48.7, 96.8, 45.8, 22.2, 62.9, 90.4, 65.9]; 
 
-    // Weekly Data per Question (12 weeks)
     const qTrends = [
         [99.1, 98.9, 94.4, 97.8, 94.4, 86.2, 86.9, 88.2, 89.9, 92.2, 92.0, 92.6], // Q1
         [62.7, 85.6, 81.0, 70.7, 81.2, 84.0, 79.2, 79.8, 83.1, 83.0, 83.3, 86.8], // Q2
@@ -286,31 +280,116 @@
         [82.6, 94.7, 92.1, 93.5, 93.3, 89.5, 83.3, 88.2, 92.9, 95.1, 88.6, 92.4], // Q9
         [65.5, 66.3, 48.9, 51.2, 65.6, 66.7, 63.2, 70.6, 76.5, 53.8, 75.7, 73.9]  // Q10
     ];
-    
-    // Average Performance by Country
+
+    // =========================================================================
+    // NEW DATA: COUNTRY-SPECIFIC TRENDS PER QUESTION
+    // Replace the arrays of 0s below with the exact row data from your sheet.
+    // Index 0 = Q1, Index 1 = Q2, ..., Index 9 = Q10.
+    // =========================================================================
+    const countryQuestionTrends = {
+        'PL': [
+            [0, 0, 0, 100.0, 93.3, 90.0, 96.7, 93.3, 100.0, 96.7, 96.7, 96.7], // Q1
+            [0, 0, 0, 62.5, 77.8, 92.9, 77.8, 96.3, 93.1, 82.1, 96.4, 100.0], // Q2
+            [0, 0, 0, 15.4, 33.3, 26.7, 33.3, 26.7, 6.7, 23.3, 23.3, 26.7], // Q3
+            [0, 0, 0, 91.7, 70.0, 53.3, 50.0, 36.7, 38.7, 56.7, 60.0, 53.3], // Q4
+            [0, 0, 0, 100.0, 100.0, 96.7, 100.0, 93.3, 96.8, 96.7, 100.0, 93.3], // Q5
+            [0, 0, 0, 25.0, 40.0, 30.0, 63.3, 46.7, 53.3, 63.3, 50.0, 50.0], // Q6
+            [0, 0, 0, 25.0, 33.3, 16.7, 33.3, 23.3, 25.8, 10.0, 23.3, 30.0], // Q7
+            [0, 0, 0, 46.2, 60.0, 60.0, 56.7, 63.3, 70.0, 56.7, 73.3, 56.7], // Q8
+            [0, 0, 0, 84.6, 83.3, 83.3, 73.3, 90.0, 90.0, 93.3, 90.0, 90.0], // Q9
+            [0, 0, 0, 60.0, 76.7, 73.3, 63.3, 63.3, 87.1, 53.3, 76.7, 79.3]  // Q10
+        ],
+        'DE': [
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100.0, 91.7], // Q1
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 75.0, 81.8], // Q2 
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25.0, 16.7], // Q3
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 75.0, 33.3], // Q4
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100.0, 100.0], // Q5
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 75.0, 83.3], // Q6
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 75.0, 50.0], // Q7
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 62.5, 16.7], // Q8
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 87.5, 75.0], // Q9
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 87.5, 91.7]  // Q10
+        ],
+        'ES': [
+            [0, 0, 0, 91.7, 96.7, 77.8, 88.0, 88.9, 80.8, 96.6, 86.7, 87.1], // Q1
+            [0, 0, 0, 61.5, 80.0, 69.6, 73.9, 64.0, 76.2, 82.8, 69.0, 80.6], // Q2
+            [0, 0, 0, 50.0, 46.7, 25.9, 34.6, 37.0, 25.9, 50.0, 38.7, 25.8], // Q3
+            [0, 0, 0, 38.5, 63.3, 46.4, 13.3, 25.0, 27.6, 66.7, 28.1, 51.6], // Q4
+            [0, 0, 0, 100.0, 96.7, 92.6, 85.2, 89.3, 96.2, 100.0, 93.8, 93.5], // Q5
+            [0, 0, 0, 53.8, 30.0, 50.0, 42.3, 53.8, 53.8, 60.0, 65.6, 71.0], // Q6
+            [0, 0, 0, 15.4, 13.3, 24.1, 30.8, 13.8, 25.0, 13.3, 16.1, 6.5], // Q7
+            [0, 0, 0, 50.0, 73.3, 65.4, 80.0, 65.4, 76.9, 72.4, 73.3, 67.7], // Q8
+            [0, 0, 0, 100.0, 100.0, 96.2, 96.0, 81.5, 92.3, 93.1, 83.9, 96.8], // Q9
+            [0, 0, 0, 46.2, 63.3, 63.0, 66.7, 66.7, 70.4, 56.7, 59.4, 58.1]  // Q10
+        ],
+        'MX': [
+            [0, 0, 0, 100.0, 93.3, 90.0, 75.9, 80.0, 90.0, 82.8, 93.3, 93.3], // Q1
+            [0, 0, 0, 80.0, 85.7, 86.7, 85.2, 74.1, 73.1, 78.6, 89.3, 81.5], // Q2 
+            [0, 0, 0, 47.8, 36.7, 33.3, 46.7, 26.7, 30.0, 44.8, 36.7, 31.0], // Q3
+            [0, 0, 0, 28.6, 63.3, 40.0, 20.0, 36.7, 40.0, 46.7, 30.0, 46.7], // Q4
+            [0, 0, 0, 100.0, 100.0, 93.3, 93.3, 96.7, 93.3, 93.1, 100.0, 96.7], // Q5
+            [0, 0, 0, 26.1, 33.3, 56.7, 48.3, 56.7, 63.3, 55.2, 46.7, 55.2], // Q6
+            [0, 0, 0, 22.7, 16.7, 10.0, 6.7, 20.0, 6.7, 13.8, 13.3, 13.3], // Q7
+            [0, 0, 0, 69.6, 53.3, 80.0, 76.7, 75.9, 76.7, 75.9, 79.3, 60.0], // Q8
+            [0, 0, 0, 95.5, 96.7, 90.0, 82.8, 100.0, 96.6, 96.6, 86.7, 96.6], // Q9
+            [0, 0, 0, 50.0, 56.7, 63.3, 60.0, 66.7, 63.3, 55.2, 76.7, 66.7]  // Q10
+        ],
+        'BR': [
+            [0, 0, 0, 0, 0, 0, 0, 93.3, 84.6, 93.3, 86.7, 93.3], // Q1
+            [0, 0, 0, 0, 0, 0, 0, 86.7, 92.3, 93.3, 80.0, 85.7], // Q2
+            [0, 0, 0, 0, 0, 0, 0, 33.3, 21.4, 6.7, 33.3, 20.0], // Q3
+            [0, 0, 0, 0, 0, 0, 0, 26.7, 14.3, 66.7, 53.3, 73.3], // Q4
+            [0, 0, 0, 0, 0, 0, 0, 100.0, 85.7, 100.0, 93.3, 100.0], // Q5
+            [0, 0, 0, 0, 0, 0, 0, 80.0, 64.3, 86.7, 80.0, 73.3], // Q6
+            [0, 0, 0, 0, 0, 0, 0, 26.7, 14.3, 26.7, 53.3, 33.3], // Q7
+            [0, 0, 0, 0, 0, 0, 0, 20.0, 23.1, 40.0, 13.3, 46.7], // Q8
+            [0, 0, 0, 0, 0, 0, 0, 73.3, 92.3, 100.0, 100.0, 100.0], // Q9
+            [0, 0, 0, 0, 0, 0, 0, 100.0, 92.9, 46.7, 100.0, 93.3]  // Q10
+        ],
+        'CO': [
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100.0], // Q1
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100.0], // Q2
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25.0], // Q3
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25.0], // Q4
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100.0], // Q5
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // Q6
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25.0], // Q7
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100.0], // Q8
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50.0], // Q9
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100.0]  // Q10
+        ]
+    };
+
+    const countryColors = {
+        'PL': '#00d3a6', // Teal
+        'DE': '#2d4059', // Dark Blue
+        'ES': '#ff5e5e', // Red
+        'MX': '#ffd04b', // Yellow
+        'BR': '#a05195', // Purple
+        'CO': '#d45087'  // Pink
+    };
+    // =========================================================================
+
     const countryData = { 
         labels: ['PL', 'DE', 'ES', 'MX', 'BR', 'CO'], 
         data: [64.0, 68.7, 59.4, 62.8, 65.6, 53.3] 
     };
     
-    // Average Performance by Channel
     const channelData = { 
         labels: ['Email', 'Chat', 'WhatsApp'], 
         data: [67.0, 58.0, 60.0] 
     };
 
-    // Grouped Bar (Pivot Table Data)
     const pivotData = {
         email:    [67.0, 68.7, 68.2, 66.8, 65.5, 53.3],
         chat:     [61.0, null, 50.5, 61.5, 70.0, null],
         whatsapp: [null, null, 59.5, 60.2, null, null]
     };
 
-    // --- Chart Global Config ---
     Chart.defaults.font.family = "'Segoe UI', 'Roboto', sans-serif";
     Chart.defaults.color = '#788995';
 
-    // Formatter to force 1 decimal place
     const tooltipDecimalFormatter = {
         callbacks: {
             label: function(context) {
@@ -322,158 +401,46 @@
         }
     };
 
-    // --- Chart 1: Overall Trend ---
+    // Global charts...
     new Chart(document.getElementById('overallTrendChart').getContext('2d'), {
-        type: 'line',
-        data: {
-            labels: weeks,
-            datasets: [{
-                label: 'Global Avg',
-                data: globalAvg,
-                borderColor: '#00d3a6',
-                backgroundColor: 'rgba(0, 211, 166, 0.1)',
-                borderWidth: 3,
-                fill: true,
-                tension: 0.4,
-                pointBackgroundColor: '#fff',
-                pointBorderWidth: 2,
-                pointRadius: 6
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: { y: { min: 50, max: 75, grid: { borderDash: [5, 5] } }, x: { grid: { display: false } } },
-            plugins: { legend: { display: false }, tooltip: tooltipDecimalFormatter }
-        }
+        type: 'line', data: { labels: weeks, datasets: [{ label: 'Global Avg', data: globalAvg, borderColor: '#00d3a6', backgroundColor: 'rgba(0, 211, 166, 0.1)', borderWidth: 3, fill: true, tension: 0.4, pointBackgroundColor: '#fff', pointBorderWidth: 2, pointRadius: 6 }] },
+        options: { responsive: true, maintainAspectRatio: false, scales: { y: { min: 50, max: 75, grid: { borderDash: [5, 5] } }, x: { grid: { display: false } } }, plugins: { legend: { display: false }, tooltip: tooltipDecimalFormatter } }
     });
 
-    // --- Chart 2: Main Bar Chart (By Question) ---
     new Chart(document.getElementById('barChart').getContext('2d'), {
-        type: 'bar',
-        data: {
-            labels: shortLabels, 
-            datasets: [{
-                label: 'Score',
-                data: scores,
-                backgroundColor: '#2d4059',
-                borderRadius: 6,
-                barPercentage: 0.6
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: { y: { beginAtZero: true, max: 100, grid: { borderDash: [5, 5] } }, x: { grid: { display: false } } },
-            plugins: { legend: { display: false }, tooltip: tooltipDecimalFormatter }
-        }
+        type: 'bar', data: { labels: shortLabels, datasets: [{ label: 'Score', data: scores, backgroundColor: '#2d4059', borderRadius: 6, barPercentage: 0.6 }] },
+        options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100, grid: { borderDash: [5, 5] } }, x: { grid: { display: false } } }, plugins: { legend: { display: false }, tooltip: tooltipDecimalFormatter } }
     });
 
-    // --- Chart 3: Country Analysis ---
     new Chart(document.getElementById('countryChart').getContext('2d'), {
-        type: 'bar',
-        data: {
-            labels: countryData.labels,
-            datasets: [{
-                label: 'Avg Score',
-                data: countryData.data,
-                backgroundColor: '#00d3a6',
-                borderRadius: 4,
-                barPercentage: 0.6
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: { y: { beginAtZero: true, max: 100 } },
-            plugins: { legend: { display: false }, tooltip: tooltipDecimalFormatter }
-        }
+        type: 'bar', data: { labels: countryData.labels, datasets: [{ label: 'Avg Score', data: countryData.data, backgroundColor: '#00d3a6', borderRadius: 4, barPercentage: 0.6 }] },
+        options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: false }, tooltip: tooltipDecimalFormatter } }
     });
 
-    // --- Chart 4: Channel Analysis ---
     new Chart(document.getElementById('channelChart').getContext('2d'), {
-        type: 'bar',
-        data: {
-            labels: channelData.labels,
-            datasets: [{
-                label: 'Avg Score',
-                data: channelData.data,
-                backgroundColor: '#2d4059',
-                borderRadius: 4,
-                barPercentage: 0.6
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: { y: { beginAtZero: true, max: 100 } },
-            plugins: { legend: { display: false }, tooltip: tooltipDecimalFormatter }
-        }
+        type: 'bar', data: { labels: channelData.labels, datasets: [{ label: 'Avg Score', data: channelData.data, backgroundColor: '#2d4059', borderRadius: 4, barPercentage: 0.6 }] },
+        options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: false }, tooltip: tooltipDecimalFormatter } }
     });
 
-    // --- Chart 5: Pivot Analysis (Country x Channel) ---
     new Chart(document.getElementById('pivotChart').getContext('2d'), {
-        type: 'bar',
-        data: {
-            labels: countryData.labels,
-            datasets: [
-                {
-                    label: 'Email',
-                    data: pivotData.email,
-                    backgroundColor: '#00d3a6',
-                    borderRadius: 4
-                },
-                {
-                    label: 'Chat',
-                    data: pivotData.chat,
-                    backgroundColor: '#2d4059',
-                    borderRadius: 4
-                },
-                {
-                    label: 'WhatsApp',
-                    data: pivotData.whatsapp,
-                    backgroundColor: '#788995',
-                    borderRadius: 4
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: { y: { beginAtZero: true, max: 100, title: { display: true, text: 'Score (%)' } } },
-            plugins: { 
-                legend: { display: true, position: 'top' },
-                tooltip: { 
-                    mode: 'index', intersect: false,
-                    callbacks: {
-                        label: function(context) {
-                            if (context.parsed.y !== null) {
-                                return context.dataset.label + ': ' + context.parsed.y.toFixed(1) + '%';
-                            }
-                            return null;
-                        }
-                    }
-                } 
-            }
-        }
+        type: 'bar', data: { labels: countryData.labels, datasets: [ { label: 'Email', data: pivotData.email, backgroundColor: '#00d3a6', borderRadius: 4 }, { label: 'Chat', data: pivotData.chat, backgroundColor: '#2d4059', borderRadius: 4 }, { label: 'WhatsApp', data: pivotData.whatsapp, backgroundColor: '#788995', borderRadius: 4 } ] },
+        options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100, title: { display: true, text: 'Score (%)' } } }, plugins: { legend: { display: true, position: 'top' }, tooltip: { mode: 'index', intersect: false, callbacks: { label: function(context) { if (context.parsed.y !== null) { return context.dataset.label + ': ' + context.parsed.y.toFixed(1) + '%'; } return null; } } } } }
     });
 
-    // --- Generate Mini Charts & Interactivity ---
     const gridContainer = document.getElementById('trendGrid');
     let modalChartInstance = null;
+    let modalCountryChartInstance = null; // New chart instance variable
 
     shortLabels.forEach((q, index) => {
         const card = document.createElement('div');
         card.className = 'mini-card';
         card.onclick = () => openModal(index);
         
-        // Calculate Trend (End vs Start)
         const startScore = qTrends[index][0];
         const endScore = qTrends[index][qTrends[index].length - 1];
         const change = endScore - startScore;
-        const trendColor = change >= 0 ? '#00d3a6' : '#ff5e5e'; // Green if pos, Red if neg
+        const trendColor = change >= 0 ? '#00d3a6' : '#ff5e5e';
 
-        // Header
         const header = document.createElement('div');
         header.className = 'mini-header';
         
@@ -489,21 +456,18 @@
         header.appendChild(scoreDisplay);
         card.appendChild(header);
 
-        // Chart Wrapper
         const canvasWrapper = document.createElement('div');
         canvasWrapper.className = 'mini-chart-wrapper';
         const canvas = document.createElement('canvas');
         canvasWrapper.appendChild(canvas);
         card.appendChild(canvasWrapper);
 
-        // Trend Display directly on card
         const trendDisplay = document.createElement('div');
         trendDisplay.className = 'mini-trend';
         trendDisplay.innerText = (change > 0 ? '+' : '') + change.toFixed(1) + '%';
         trendDisplay.style.color = trendColor;
         card.appendChild(trendDisplay);
 
-        // Click Hint
         const hint = document.createElement('div');
         hint.className = 'click-hint';
         hint.innerText = 'Click to view details';
@@ -511,32 +475,13 @@
 
         gridContainer.appendChild(card);
 
-        // Render Mini Line Chart
         const ctx = canvas.getContext('2d');
-        
         new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: weeks,
-                datasets: [{
-                    data: qTrends[index],
-                    borderColor: trendColor,
-                    borderWidth: 2,
-                    pointRadius: 0,
-                    tension: 0.3
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false }, tooltip: { enabled: false } },
-                scales: { x: { display: false }, y: { display: false, min: 0, max: 100 } },
-                events: [] 
-            }
+            type: 'line', data: { labels: weeks, datasets: [{ data: qTrends[index], borderColor: trendColor, borderWidth: 2, pointRadius: 0, tension: 0.3 }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: false } }, scales: { x: { display: false }, y: { display: false, min: 0, max: 100 } }, events: [] }
         });
     });
 
-    // --- Question Modal Logic ---
     function openModal(index) {
         const modal = document.getElementById('modalOverlay');
         const title = document.getElementById('modalTitle');
@@ -545,7 +490,6 @@
         const wEnd = document.getElementById('modalEnd');
         const trend = document.getElementById('modalTrend');
         
-        // Populate Data
         title.innerText = shortLabels[index];
         text.innerText = fullQuestions[index];
         
@@ -562,43 +506,55 @@
 
         modal.style.display = 'flex';
 
-        // Render Modal Chart
-        const ctx = document.getElementById('modalChart').getContext('2d');
+        // Render Global Modal Chart
+        const ctxGlobal = document.getElementById('modalChart').getContext('2d');
         if (modalChartInstance) modalChartInstance.destroy();
         
-        modalChartInstance = new Chart(ctx, {
+        modalChartInstance = new Chart(ctxGlobal, {
+            type: 'line',
+            data: { labels: weeks, datasets: [{ label: 'Global Score', data: data, borderColor: '#2d4059', backgroundColor: 'rgba(45, 64, 89, 0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#fff', pointBorderWidth: 2 }] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: false }, tooltip: tooltipDecimalFormatter } }
+        });
+
+        // Render Country Breakdown Chart
+        const ctxCountry = document.getElementById('modalCountryChart').getContext('2d');
+        if (modalCountryChartInstance) modalCountryChartInstance.destroy();
+
+        // Build datasets mapping dynamically based on index
+        const countryDatasets = Object.keys(countryQuestionTrends).map(country => {
+            return {
+                label: country,
+                data: countryQuestionTrends[country][index],
+                borderColor: countryColors[country],
+                backgroundColor: countryColors[country],
+                borderWidth: 2,
+                tension: 0.3,
+                fill: false,
+                pointRadius: 3,
+                pointBackgroundColor: '#fff'
+            };
+        });
+
+        modalCountryChartInstance = new Chart(ctxCountry, {
             type: 'line',
             data: {
                 labels: weeks,
-                datasets: [{
-                    label: 'Score',
-                    data: data,
-                    borderColor: '#2d4059',
-                    backgroundColor: 'rgba(45, 64, 89, 0.1)',
-                    fill: true,
-                    tension: 0.3,
-                    pointBackgroundColor: '#fff',
-                    pointBorderWidth: 2
-                }]
+                datasets: countryDatasets
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: { y: { beginAtZero: true, max: 100 } },
-                plugins: { tooltip: tooltipDecimalFormatter }
+                plugins: {
+                    legend: { display: true, position: 'bottom' },
+                    tooltip: tooltipDecimalFormatter
+                }
             }
         });
     }
 
-    function closeModal(event) {
-        if (event.target.id === 'modalOverlay') document.getElementById('modalOverlay').style.display = 'none';
-    }
-    
-    function closeModalDirect() {
-        document.getElementById('modalOverlay').style.display = 'none';
-    }
-
-    // --- Methodology Modal Logic ---
+    function closeModal(event) { if (event.target.id === 'modalOverlay') document.getElementById('modalOverlay').style.display = 'none'; }
+    function closeModalDirect() { document.getElementById('modalOverlay').style.display = 'none'; }
     function openMethodology() { document.getElementById('methModalOverlay').style.display = 'flex'; }
     function closeMethModal(event) { if (event.target.id === 'methModalOverlay') document.getElementById('methModalOverlay').style.display = 'none'; }
     function closeMethModalDirect() { document.getElementById('methModalOverlay').style.display = 'none'; }
