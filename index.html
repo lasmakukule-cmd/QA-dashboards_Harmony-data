@@ -351,7 +351,7 @@ N/A: The call disconnected unexpectedly, the customer hung up prematurely, or th
 
     // Average scores for each country globally 
     const globalCountryLabels = ['PL', 'DE', 'ES', 'MX', 'BR', 'CO', 'IT'];
-    const globalCountryScores = [76.1, 76.5, 81.5, 83.7, 79.5, 86.7, 80.2];
+    const globalCountryScores = [76.4, 76.5, 81.5, 83.7, 79.5, 86.7, 80.2];
 
     // Country Specific Question Trends
     const countryQuestionTrends = {
@@ -373,45 +373,49 @@ N/A: The call disconnected unexpectedly, the customer hung up prematurely, or th
             score: "78.8%",
             topCountry: "Colombia (86.7%)",
             topQuestions: [
-                { q: "Q4 Core question", score: "98.6%" }, { q: "Q7 Next steps", score: "97.7%" }, { q: "Q6 Answered all questions", score: "96.0%" }
+                { q: "Q4 Core question", score: "98.6%" }, { q: "Q7 Next steps", score: "97.6%" }, { q: "Q6 Answered all questions", score: "96.0%" }
             ],
             topAgents: [
-                { name: "Yesly Vasquez (CO)", score: "89.7%" }, { name: "Lais Mattuella (BR)", score: "89.6%" }, { name: "Martyna Romanska (PL)", score: "89.3%" }, { name: "Ma Lugo (MX)", score: "87.3%" }, { name: "Maira Gudino (ES)", score: "87.5%" }
+                { name: "Yesly Vasquez (CO)", score: "89.7%" }, { name: "Lais Mattuella (BR)", score: "89.6%" }, { name: "Martyna Romanska (PL)", score: "89.4%" }, { name: "Ma Lugo (MX)", score: "87.3%" }, { name: "Maira Gudino (ES)", score: "87.5%" }
             ],
             trend: [79.0, 79.0, 77.3, 79.2, 79.6] //
         },
         "PL": {
-            score: "76.1%", topAgent: "Martyna Romanska (89.3%)",
-            topQuestions: [ { q: " Q4 Core question", score: "99.1%" }, { q: "Q7 Next steps", score: "97.6%" }, { q: "Q6 Answered all questions", score: "96.8%" } ],
-            bottomQuestion: { q: "Q2 Resolution confirmation", score: "6.1%" },
-            teams: [ { name: "PL CC ENTERPRISE", score: "81.0%" }, { name: "PL CC MULTI", score: "82.9%" }, { name: "PL CC SOR", score: "82.5%" }, { name: "PL MYDR", score: "72.6%" } ],
-            trend: [75.8, 76.3, 75.1, 77.0, 76.9],
-            qAvg: [95.7, 6.1, 90.7, 99.1, 82.2, 96.8, 97.6, 75.4, 92.8, 76.1, 24.1], // 
+            score: "76.4%", topAgent: "Martyna Romanska (89.4%)",
+            topQuestions: [ { q: " Q4 Core question", score: "99.2%" }, { q: "Q8 Empathy", score: "97.5%" }, { q: "Q7 Next steps", score: "96.8%" } ],
+            bottomQuestion: { q: "Q2 Resolution confirmation", score: "6.2%" },
+            teams: [ { name: "PL CC ENTERPRISE", score: "80.4%" }, { name: "PL CC MULTI", score: "82.7%" }, { name: "PL CC SOR", score: "82.5%" }, { name: "PL MYDR", score: "72.6%" } ],
+            trend: [75.8, 76.7, 75.2, 77.1, 77.4],
+            qAvg: [95.7, 6.2, 90.7, 99.2, 82.4, 96.8, 97.5, 75.0, 92.8, 76.1, 25.8],
             agents: [
-                { name: "Ewelina Czarnecka", score: "84.1%", trend: [, 86.2, 85.1, 79.1, 86.1], strength: "Professional & empathetic, maintains courteous tone throughout complex permission/legal discussions, asks good clarifying questions", weakness: "Resolution confirmation — ends calls with thanks rather than an explicit check that all issues are resolved", team: "PL CC ENTERPRISE" }, 
+                { name: "Ewelina Czarnecka", score: "84.1%", trend: [null, 86.2, 85.1, 79.1, 86.1], strength: "Professional & empathetic, maintains courteous tone throughout complex permission/legal discussions, asks good clarifying questions", weakness: "Resolution confirmation — ends calls with thanks rather than an explicit check that all issues are resolved", team: "PL CC ENTERPRISE" }, 
 		{ name: "Maciej Bazela", score: "78.4%", trend: [78.1, 76.5, 77.8, 81.8, 77.9], strength: "Pending Input", weakness: "Pending Input", team: "PL CC ENTERPRISE" }, 		
-		{ name: "Marta Kumek", score: "79.0%", trend: [70.4, 74.2, 83.6, 80.1, 86.4], strength: "Excellent call structure — provides clear timelines (15-min follow-up), asks good clarifying questions, and always transitions to the post-call survey", weakness: "Resolution confirmation — plans escalations and follow-ups but does not confirm issue resolution before ending the call", team: "PL CC ENTERPRISE" }, 
-		{ name: "Karolina Kawka", score: "85.8%", trend: [87.3, 86.4, 85.8, 83.8, ], strength: "Pending input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Marta Kumek", score: "79.0%", trend: [70.4, 74.2, 83.6, 80.1, 86.4], strength: "Excellent call structure — provides clear timelines (15-min follow-up), asks good clarifying questions, and always transitions to the post-call survey", weakness: "Resolution confirmation — plans escalations and follow-ups but does not confirm issue resolution before ending the call", team: "PL CC ENTERPRISE" },  
 		{ name: "Katarzyna Kobryn", score: "80.1%", trend: [80.5, 79.2, 76.7, 81.7, 82.2], strength: "Efficient & confident execution — identifies issues quickly, performs direct profile actions, and provides clear follow-up contact guidance", weakness: "Post-call survey — consistently omits the transition to post-call feedback", team: "PL CC MULTI" }, 
 		{ name: "Maria Misiewicz", score: "83.0%", trend: [86.8, 84.1, 80.1, 83.3, 80.7], strength: "Pending Input", weakness: "Pending Input", team: "PL CC MULTI" }, 		
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
-		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }
+		{ name: "Martyna Molak", score: "87.7%", trend: [84.4, 91.6, 87.4, 88.8, 86.1], strength: "Product knowledge & channel routing — correctly identifies the right escalation path and provides actionable next steps for refund cases", weakness: "Active listening & interruptions — explicitly stated 'Będę przerywał' (I will interrupt), and also missed asking clarifying questions; call closure was abrupt", team: "PL CC MULTI" }, 
+		{ name: "Weronika Wojciechowska", score: "79.7%", trend: [79.1, 77.4, 79.4, 80.3, 82.5], strength: "Pending Input", weakness: "Pending Input", team: "PL CC MULTI" }, 
+		{ name: "Jakub Misior", score: "80.3%", trend: [79.6, 81.1, 80.5, 81.1, 79.1], strength: "Empathy & active listening — consistently acknowledges customer situations ('Rozumiem', 'Przepraszam'), avoids interruptions, and asks clarifying questions to resolve notification and calendar issues", weakness: "Call closure & survey — does not provide explicit closure instructions, follow-up next steps, or post-call survey transition", team: "PL CC SOR" }, 
+		{ name: "Joanna Płaskota-Olczyńska", score: "84.5%", trend: [87.4, 86.4, 80.9, null, 83.3], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
+		{ name: "Lukasz Koscielniak", score: "79.2%", trend: [76.5, 73.9, 79.9, 83.7, 82.2], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
+		{ name: "Magda Waszkiewicz", score: "83.6%", trend: [83.1, 81.2, 82.8, 87.7, 83.2], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
+		{ name: "Monika Delazek", score: "85.4%", trend: [null, 85.4, null, null, null], strength: "Pending Input", weakness: "Pending Input", team: "PL CC MULTI" }, 
+		{ name: "Monika Kowalska", score: "83.9%", trend: [null, 81.0, 84.9, null, 85.8], strength: "Pending Input", weakness: "Pending Input", team: "PL CC MULTI" }, 
+		{ name: "Julia Tomaszewska", score: "85.2%", trend: [null, 81.2, 86.4, 90.9, 82.3], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
+		{ name: "Martyna Romanska", score: "89.4%", trend: [null, 89.4, 91.9, 88.4, 87.9], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
+		{ name: "Sirarpi Javakyan", score: "85.0%", trend: [null, null, 85.7, 85.1, 84.1], strength: "Pending Input", weakness: "Pending Input", team: "PL CC ENTERPRISE" }, 
+		{ name: "Sylwia Skora", score: "85.8%", trend: [null, null, 88.6, 85.1, 83.6], strength: "Pending Input", weakness: "Pending Input", team: "PL CC ENTERPRISE" }, 
+		{ name: "Paulina Kos", score: "86.6%", trend: [null, null, 86.5, 87.5, 85.8], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
+		{ name: "Adam Czerniakiewicz", score: "77.6%", trend: [73.8, 78.7, 73.9, 81.0, 80.6], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }, 
+		{ name: "Adrian Piotrowski", score: "73.0%", trend: [75.7, 70.3, 71.1, 77.2, 70.8], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }, 
+		{ name: "Daniel Trojanowski", score: "73.0%", trend: [70.6, 72.9, 72.8, 74.3, 74.5], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }, 
+		{ name: "Joanna Chalupniczak", score: "74.7%", trend: [72.7, 78.6, 75.7, 73.3, 73.4], strength: "Step-by-step guidance & clear communication — walks customers through technical processes (password resets, security settings) with precision and professionalism", weakness: "Empathy & emotional acknowledgment — provides procedural help but does not acknowledge the customer's emotions; also misses the post-call survey", team: "PL MYDR" }, 
+		{ name: "Kacper Ugarenko", score: "72.2%", trend: [71.2, 73.2, 70.6, 71.8, 74.2], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" },
+		{ name: "Karina Ziolkowska", score: "68.4%", trend: [65.7, 70.5, 67.4, 68.0, 70.5], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }, 
+		{ name: "Marek Kowalczyk", score: "74.8%", trend: [76.6, 73.9, 74.3, 73.1, 76.1], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }, 
+		{ name: "Natalia Koziol", score: "69.9%", trend: [70.8, 71.0, 68.8, 68.1, 70.6], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }, 
+		{ name: "Marta Krolak", score: "71.6%", trend: [70.3, 70.2, 72.7, 73.0, null], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" },
+		{ name: "Katarzyna Obara-Wrzosek", score: "73.4%", trend: [null, null, 74.9, 75.0, 70.5], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }
             ]
         },
         "IT": { 
@@ -482,7 +486,6 @@ N/A: The call disconnected unexpectedly, the customer hung up prematurely, or th
     let modalChartInstance = null;
     let modalCountryChartInstance = null;
 
-    // Custom Plugin to permanently show data labels when expanded
     const alwaysShowLabelsPlugin = {
         id: 'alwaysShowLabels',
         afterDatasetsDraw(chart, args, pluginOptions) {
@@ -511,23 +514,48 @@ N/A: The call disconnected unexpectedly, the customer hung up prematurely, or th
         mainTrendChart = new Chart(ctx, {
             type: 'line',
             data: { labels: weeks, datasets: [{ data: [], borderColor: '#00d3a6', backgroundColor: 'rgba(0, 211, 166, 0.1)', borderWidth: 3, fill: true, tension: 0.4, pointBackgroundColor: '#fff' }] },
-            options: { responsive: true, maintainAspectRatio: false, scales: { y: { min: 0, max: 100 } }, plugins: { legend: { display: false } } }
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                layout: { padding: { top: 20, left: 10, right: 10 } },
+                clip: false, // 
+                scales: { y: { min: 0, max: 100 } }, 
+                plugins: { legend: { display: false } } 
+            }
         });
 
         // Initialize Global Bar Charts
         globalBarChart = new Chart(document.getElementById('globalBarChart').getContext('2d'), {
             type: 'bar', data: { labels: shortLabels, datasets: [{ data: scores, backgroundColor: '#2d4059', borderRadius: 6 }] },
-            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: false } } }
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                layout: { padding: { top: 25 } },
+                scales: { y: { beginAtZero: true, max: 100 } }, 
+                plugins: { legend: { display: false } } 
+            }
         });
 
         globalCountryChart = new Chart(document.getElementById('globalCountryChart').getContext('2d'), {
             type: 'bar', data: { labels: globalCountryLabels, datasets: [{ data: globalCountryScores, backgroundColor: '#00d3a6', borderRadius: 6 }] },
-            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: false } } }
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                layout: { padding: { top: 25 } },
+                scales: { y: { beginAtZero: true, max: 100 } }, 
+                plugins: { legend: { display: false } } 
+            }
         });
 
         countryQuestionChart = new Chart(document.getElementById('countryQuestionChart').getContext('2d'), {
             type: 'bar', data: { labels: shortLabels, datasets: [{ data: [], backgroundColor: '#ffd04b', borderRadius: 6 }] },
-            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: false } } }
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                layout: { padding: { top: 25 } }, 
+                scales: { y: { beginAtZero: true, max: 100 } }, 
+                plugins: { legend: { display: false } } 
+            }
         });
 
         // Initialize Global Prompts Section
@@ -646,8 +674,8 @@ function renderAgents(countryData, teamFilter = "All") {
                 options: { 
                     responsive: true, maintainAspectRatio: false, 
                     plugins: { legend: { display: false }, tooltip: {enabled: true} },
-                    layout: { padding: { top: 15 } },
-                    scales: { x: { display: false }, y: { display: false, min: 0, max: 110 } } 
+                    layout: { padding: { top: 15, left: 20, right: 20, bottom: 10 } },
+                    scales: { x: { display: false }, y: { display: false, min: 0, max: 100 } } 
                 },
                 plugins: [alwaysShowLabelsPlugin]
             });
@@ -829,9 +857,27 @@ function renderAgents(countryData, teamFilter = "All") {
             };
         });
 
-        modalCountryChartInstance = new Chart(document.getElementById('modalCountryChart').getContext('2d'), {
-            type: 'line', data: { labels: weeks, datasets: countryDatasets },
-            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: true, position: 'bottom' } } }
+       modalCountryChartInstance = new Chart(document.getElementById('modalCountryChart').getContext('2d'), {
+            type: 'line', 
+            data: { labels: weeks, datasets: countryDatasets },
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                layout: { padding: { top: 15 } }, // Adds padding to prevent top cutoff here too
+                scales: { y: { beginAtZero: true, max: 100 } }, 
+                // --- NEW INTERACTION LOGIC ---
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                plugins: { 
+                    legend: { display: true, position: 'bottom' },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                } 
+            }
         });
     }
 
