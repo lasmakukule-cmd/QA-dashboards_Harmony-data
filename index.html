@@ -204,8 +204,18 @@
     </div>
 
     <div class="chart-section hidden" id="agent-section">
-        <h2>Agent Performance Breakdown</h2>
-        <p style="color: var(--dp-gray); font-size: 0.9em; margin-top: -15px; margin-bottom: 20px;">Trendlines reflect ISO Week progression (W12-W16). Hover or click to view data values.</p>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px;">
+            <div>
+                <h2 style="margin-bottom: 5px;">Agent Performance Breakdown</h2>
+                <p style="color: var(--dp-gray); font-size: 0.9em; margin-top: 0;">Trendlines reflect ISO Week progression (W12-W16). Hover or click to view data values.</p>
+            </div>
+            <div id="team-filter-wrapper">
+                <label for="teamFilter" style="font-weight: bold; color: var(--dp-gray); font-size: 0.8em; text-transform: uppercase; display: block; margin-bottom: 5px;">Filter by Team:</label>
+                <select id="teamFilter" onchange="filterAgents()" style="padding: 8px; border-radius: 6px; border: 1px solid #e0e6eb; outline: none; min-width: 180px;">
+                    <option value="All">All Teams</option>
+                </select>
+            </div>
+        </div>
         <div class="agent-grid" id="agent-grid">
             </div>
     </div>
@@ -378,7 +388,30 @@ N/A: The call disconnected unexpectedly, the customer hung up prematurely, or th
             trend: [75.8, 76.3, 75.1, 77.0, 76.9],
             qAvg: [95.7, 6.1, 90.7, 99.1, 82.2, 96.8, 97.6, 75.4, 92.8, 76.1, 24.1], // 
             agents: [
-                { name: "Ewelina Czarnecka", score: "84.1%", trend: [, 86.2, 85.1, 79.1, 86.1], strength: "Professional & empathetic, maintains courteous tone throughout complex permission/legal discussions, asks good clarifying questions", weakness: "Resolution confirmation — ends calls with thanks rather than an explicit check that all issues are resolved" }, { name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input" }, { name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input" }, { name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input" }, { name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input" }, { name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input" }, { name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input" }
+                { name: "Ewelina Czarnecka", score: "84.1%", trend: [, 86.2, 85.1, 79.1, 86.1], strength: "Professional & empathetic, maintains courteous tone throughout complex permission/legal discussions, asks good clarifying questions", weakness: "Resolution confirmation — ends calls with thanks rather than an explicit check that all issues are resolved", team: "PL CC ENTERPRISE" }, 
+		{ name: "Maciej Bazela", score: "78.4%", trend: [78.1, 76.5, 77.8, 81.8, 77.9], strength: "Pending Input", weakness: "Pending Input", team: "PL CC ENTERPRISE" }, 		
+		{ name: "Marta Kumek", score: "79.0%", trend: [70.4, 74.2, 83.6, 80.1, 86.4], strength: "Excellent call structure — provides clear timelines (15-min follow-up), asks good clarifying questions, and always transitions to the post-call survey", weakness: "Resolution confirmation — plans escalations and follow-ups but does not confirm issue resolution before ending the call", team: "PL CC ENTERPRISE" }, 
+		{ name: "Karolina Kawka", score: "85.8%", trend: [87.3, 86.4, 85.8, 83.8, ], strength: "Pending input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Katarzyna Kobryn", score: "80.1%", trend: [80.5, 79.2, 76.7, 81.7, 82.2], strength: "Efficient & confident execution — identifies issues quickly, performs direct profile actions, and provides clear follow-up contact guidance", weakness: "Post-call survey — consistently omits the transition to post-call feedback", team: "PL CC MULTI" }, 
+		{ name: "Maria Misiewicz", score: "83.0%", trend: [86.8, 84.1, 80.1, 83.3, 80.7], strength: "Pending Input", weakness: "Pending Input", team: "PL CC MULTI" }, 		
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }, 
+		{ name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending input" }
             ]
         },
         "IT": { 
@@ -559,12 +592,100 @@ N/A: The call disconnected unexpectedly, the customer hung up prematurely, or th
         agentChartInstances.forEach(chart => chart.destroy());
         agentChartInstances = [];
     }
+function renderAgents(countryData, teamFilter = "All") {
+        const agentGrid = document.getElementById('agent-grid');
+        destroyAgentCharts();
+        agentGrid.innerHTML = ''; 
+        
+        let filteredAgents = countryData.agents;
+        if (teamFilter !== "All") {
+            filteredAgents = filteredAgents.filter(a => a.team === teamFilter);
+        }
 
+        filteredAgents.forEach((agent, index) => {
+            const canvasId = `agentChart-${index}`;
+            const strText = agent.strength ? agent.strength : "Data pending input...";
+            const weakText = agent.weakness ? agent.weakness : "Data pending input...";
+
+            const card = `
+                <div class="agent-card" onclick="toggleAgentDetails(this, ${index})">
+                    <div class="agent-header">
+                        <div class="agent-name">${agent.name}</div>
+                        <div class="agent-score">${agent.score}</div>
+                    </div>
+                    <div class="agent-chart-wrapper">
+                        <canvas id="${canvasId}"></canvas>
+                    </div>
+                    <div class="click-expand-hint">Click to expand details ▼</div>
+                    
+                    <div class="agent-details">
+                        <div class="sw-box">
+                            <span class="sw-label strength">Key Strengths</span>
+                            <div class="sw-text">${strText}</div>
+                        </div>
+                        <div class="sw-box">
+                            <span class="sw-label weakness">Areas for Improvement</span>
+                            <div class="sw-text">${weakText}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            agentGrid.innerHTML += card;
+        });
+
+        filteredAgents.forEach((agent, index) => {
+            const agentStart = agent.trend[0];
+            const agentEnd = agent.trend[agent.trend.length - 1];
+            const agentIsUp = agentEnd >= agentStart;
+            const agentColor = agentIsUp ? '#00d3a6' : '#ff5e5e';
+
+            const ctx = document.getElementById(`agentChart-${index}`).getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: { labels: weeks, datasets: [{ data: agent.trend, borderColor: agentColor, backgroundColor: agentColor, borderWidth: 2, tension: 0.3, pointRadius: 4, pointHoverRadius: 6 }] },
+                options: { 
+                    responsive: true, maintainAspectRatio: false, 
+                    plugins: { legend: { display: false }, tooltip: {enabled: true} },
+                    layout: { padding: { top: 15 } },
+                    scales: { x: { display: false }, y: { display: false, min: 0, max: 110 } } 
+                },
+                plugins: [alwaysShowLabelsPlugin]
+            });
+            agentChartInstances.push(chart);
+        });
+    }
+
+    function filterAgents() {
+        const country = document.getElementById('countryFilter').value;
+        const team = document.getElementById('teamFilter').value;
+        if(country !== "Global" && country !== "IT") {
+            renderAgents(db[country], team);
+        }
+    }
     // Toggle Agent Details Expansion & Trigger Labels
-    function toggleAgentDetails(element, index) {
-        element.classList.toggle('expanded');
+    function toggleAgentDetails(clickedElement, index) {
+        // 1. Close all other expanded cards first
+        document.querySelectorAll('.agent-card').forEach(card => {
+            if (card !== clickedElement && card.classList.contains('expanded')) {
+                card.classList.remove('expanded');
+                card.querySelector('.click-expand-hint').innerText = 'Click to expand details ▼';
+            }
+        });
+
+        // 2. Toggle the clicked card
+        clickedElement.classList.toggle('expanded');
+        
+        // 3. Update the text to arrow up/down
+        const hint = clickedElement.querySelector('.click-expand-hint');
+        if (clickedElement.classList.contains('expanded')) {
+            hint.innerText = 'Collapse details ▲';
+        } else {
+            hint.innerText = 'Click to expand details ▼';
+        }
+
+        // 4. Update the chart to show numbers
         if(agentChartInstances[index]) {
-            agentChartInstances[index].update(); // Forces re-draw to show/hide labels
+            agentChartInstances[index].update(); 
         }
     }
 
@@ -642,67 +763,33 @@ N/A: The call disconnected unexpectedly, the customer hung up prematurely, or th
 
         // Agent Cards
         const agentSection = document.getElementById('agent-section');
-        const agentGrid = document.getElementById('agent-grid');
-        destroyAgentCharts();
-        agentGrid.innerHTML = ''; 
 
         if (country === "Global" || country === "IT") {
             agentSection.classList.add('hidden');
         } else {
             agentSection.classList.remove('hidden');
             
-            data.agents.forEach((agent, index) => {
-                const canvasId = `agentChart-${index}`;
-                const strText = agent.strength ? agent.strength : "Data pending input...";
-                const weakText = agent.weakness ? agent.weakness : "Data pending input...";
-
-                const card = `
-                    <div class="agent-card" onclick="toggleAgentDetails(this, ${index})">
-                        <div class="agent-header">
-                            <div class="agent-name">${agent.name}</div>
-                            <div class="agent-score">${agent.score}</div>
-                        </div>
-                        <div class="agent-chart-wrapper">
-                            <canvas id="${canvasId}"></canvas>
-                        </div>
-                        <div class="click-expand-hint">Click to expand details ▼</div>
-                        
-                        <div class="agent-details">
-                            <div class="sw-box">
-                                <span class="sw-label strength">Key Strengths</span>
-                                <div class="sw-text">${strText}</div>
-                            </div>
-                            <div class="sw-box">
-                                <span class="sw-label weakness">Areas for Improvement</span>
-                                <div class="sw-text">${weakText}</div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                agentGrid.innerHTML += card;
-            });
-
-            data.agents.forEach((agent, index) => {
-                const agentStart = agent.trend[0];
-                const agentEnd = agent.trend[agent.trend.length - 1];
-                const agentIsUp = agentEnd >= agentStart;
-                const agentColor = agentIsUp ? '#00d3a6' : '#ff5e5e';
-
-                const ctx = document.getElementById(`agentChart-${index}`).getContext('2d');
-                const chart = new Chart(ctx, {
-                    type: 'line',
-                    data: { labels: weeks, datasets: [{ data: agent.trend, borderColor: agentColor, backgroundColor: agentColor, borderWidth: 2, tension: 0.3, pointRadius: 4, pointHoverRadius: 6 }] },
-                    options: { 
-                        responsive: true, 
-                        maintainAspectRatio: false, 
-                        plugins: { legend: { display: false }, tooltip: {enabled: true} },
-                        layout: { padding: { top: 15 } },
-                        scales: { x: { display: false }, y: { display: false, min: 0, max: 100 } } 
-                    },
-                    plugins: [alwaysShowLabelsPlugin]
+            // Target the dropdown and its wrapper
+            const teamSelect = document.getElementById('teamFilter');
+            const teamFilterWrapper = document.getElementById('team-filter-wrapper');
+            
+            teamSelect.innerHTML = '<option value="All">All Teams</option>';
+            
+            // Find all unique teams in this country
+            const uniqueTeams = [...new Set(data.agents.filter(a => a.team).map(a => a.team))];
+            
+            // Auto-hide logic: If no teams exist, hide the dropdown entirely
+            if (uniqueTeams.length === 0) {
+                teamFilterWrapper.style.display = 'none';
+            } else {
+                teamFilterWrapper.style.display = 'block'; // Show it if teams exist
+                uniqueTeams.forEach(team => {
+                    teamSelect.innerHTML += `<option value="${team}">${team}</option>`;
                 });
-                agentChartInstances.push(chart);
-            });
+            }
+
+            // Render all agents by default when a country is first selected
+            renderAgents(data, "All");
         }
     }
 
