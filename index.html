@@ -206,8 +206,8 @@
     <div class="chart-section hidden" id="agent-section">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px;">
             <div>
-                <h2 style="margin-bottom: 5px;">Agent Performance Breakdown</h2>
-                <p style="color: var(--dp-gray); font-size: 0.9em; margin-top: 0;">Trendlines reflect ISO Week progression (W12-W16). Hover or click to view data values.</p>
+                <h2 id="agent-section-title" style="margin-bottom: 5px;">Agent Performance Breakdown</h2>
+                <p id="agent-section-subtitle" style="color: var(--dp-gray); font-size: 0.9em; margin-top: 0;">Trendlines reflect ISO Week progression (W12-W16). Hover or click to view data values.</p>
             </div>
             <div id="team-filter-wrapper">
                 <label for="teamFilter" style="font-weight: bold; color: var(--dp-gray); font-size: 0.8em; text-transform: uppercase; display: block; margin-bottom: 5px;">Filter by Team:</label>
@@ -384,7 +384,7 @@ N/A: The call disconnected unexpectedly, the customer hung up prematurely, or th
             score: "76.4%", topAgent: "Martyna Romanska (89.4%)",
             topQuestions: [ { q: " Q4 Core question", score: "99.2%" }, { q: "Q8 Empathy", score: "97.5%" }, { q: "Q7 Next steps", score: "96.8%" } ],
             bottomQuestion: { q: "Q2 Resolution confirmation", score: "6.2%" },
-            teams: [ { name: "PL CC ENTERPRISE", score: "80.4%" }, { name: "PL CC MULTI", score: "82.7%" }, { name: "PL CC SOR", score: "82.5%" }, { name: "PL MYDR", score: "72.6%" } ],
+            teams: [ { name: "PL CC ENTERPRISE", score: "80.4%" }, { name: "PL CC MULTI", score: "82.7%" }, { name: "PL CC SOR", score: "82.5%" }, { name: "PL MYDR", score: "72.6%" } ], //Leave empty brackets if no teams available
             trend: [75.8, 76.7, 75.2, 77.1, 77.4],
             qAvg: [95.7, 6.2, 90.7, 99.2, 82.4, 96.8, 97.5, 75.0, 92.8, 76.1, 25.8],
             agents: [
@@ -419,59 +419,81 @@ N/A: The call disconnected unexpectedly, the customer hung up prematurely, or th
             ]
         },
         "IT": { 
-            score: "0.0%", topAgent: "HIDDEN", 
-            topQuestions: [ { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" } ],
-            bottomQuestion: { q: "Pending", score: "0.0%" },
-            teams: [ { name: "Pending Team", score: "0.0%" } ],
-            trend: [0, 0, 0, 0, 0],
-            qAvg: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 
-            agents: [] // IT hidden
+            score: "80.2%", topAgent: "Hidden", 
+            topQuestions: [ { q: "Q4 Core question", score: "99.1%" }, { q: "Q7 Next steps", score: "97.1%" }, { q: "Q6 Answered all questions", score: "96.6%" } ],
+            bottomQuestion: { q: "Q3 Confidence", score: "9.5%" },
+            teams: [], 
+            trend: [80.1, 80.4, 80.4, 79.2, 80.5],
+            qAvg: [93.8, 9.5, 93.8, 99.1, 75.4, 96.6, 97.1, 70.9, 92.3, 88.9, 64.6],
+            strength: "Empathy, apology & customer reassurance — the IT team consistently scores 'Yes' on empathy across agents. Multiple agents explicitly apologize when appropriate, acknowledge customer distress, and use warm language to de-escalate frustrated customers. This is a standout trait compared to other markets.", 
+            weakness: "Post-call survey transition & explicit resolution confirmation — almost universally, IT agents end calls without explicitly confirming that all issues are resolved. CSAT survey reminders are missing in almost half of the calss",
+            agents: [] // IT hidden due to legal reasons
         },
         "ES": {
-            score: "0.0%", topAgent: "Pending Agent (0.0%)",
-            topQuestions: [ { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" } ],
-            bottomQuestion: { q: "Pending", score: "0.0%" },
-            teams: [ { name: "Pending Team", score: "0.0%" } ],
-            trend: [0, 0, 0, 0, 0],
-            qAvg: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 
+            score: "81.1%", topAgent: "Maira Gudino (87.5%)",
+            topQuestions: [ { q: "Q7 Next steps", score: "98.0%" }, { q: "Q4 Core question", score: "97.9%" }, { q: "Q1 Active listening", score: "96.8%" } ],
+            bottomQuestion: { q: "Q2 Resolution confirmation", score: "5.5%" },
+            teams: [ { name: "ES CC SUPPORT", score: "82.8%" }, { name: "ES CC CLOUD SUPPORT", score: "79.7%" } ], //Leave empty brackets if no teams available
+            trend: [81.7, 80.1, 81.8, 80.1, 81.9],
+            qAvg: [96.4, 5.5, 92.3, 98.1, 89.1, 95.4, 98.0, 76.8, 95.6, 87.5, 57.9],  
             agents: [
-                { name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input" }
-            ]
+                { name: "Beatriu Gonzalez", score: "82.9%", trend: [82.9, 83.8, 79.7, 82.5, 85.7], strength: "Empathy & escalation — apologises for inconveniences, escalates professionally, and keeps the customer informed throughout", weakness: "Post-call survey transition — not consistently requested, need to focus on asking the customers if all questions have been answered before finalizing the call", team: "ES CC CLOUD SUPPORT" }, 
+		{ name: "Celia Zambrano", score: "78.1%", trend: [80.9, 77.7, 75.9, 74.8, 81.0], strength: "Pending Input", weakness: "Pending Input", team: "ES CC CLOUD SUPPORT" }, 
+		{ name: "Laura Capon", score: "79.2%", trend: [78.1, 80.7, null, 77.3, 80.7], strength: "Full-service troubleshooting — proactively uses screen sharing, tests internally, and offers a concrete workaround; consistently scores 'Yes' on all technical criteria", weakness: "Resolution confirmation — does not explicitly confirm all issues are resolved before closing", team: "ES CC CLOUD SUPPORT" }, 
+		{ name: "Maria Garcia", score: "69.9%", trend: [40.9, 67.4, 81.0, 80.2, 80.2], strength: "Pending Input", weakness: "Pending Input", team: "ES CC CLOUD SUPPORT" }, 
+		{ name: "Melisa Oviedo", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "ES CC CLOUD SUPPORT" }, 
+		{ name: "Silvia Rodriguez", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "ES CC CLOUD SUPPORT" }, 
+		{ name: "Vanessa Isidro", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "ES CC CLOUD SUPPORT" }, 
+		{ name: "Alba Echavarria", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
+		{ name: "Alex Frias", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
+		{ name: "Claudia Bohorquez", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
+		{ name: "Eliana Hernandez", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
+		{ name: "Julie Toledo", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
+		{ name: "Katheryn Arias", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
+		{ name: "Laura Vasquez", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
+		{ name: "Lizandra Valverde", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
+		{ name: "Maira Gudino", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
+		{ name: "Mariela Galeazzi", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
+		{ name: "Patricia Campoblanco", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
+		{ name: "Robert Agenjo", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
+		{ name: "Ruben Pena", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" },
+		{ name: "Victor Fuentes", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }
+	]
         },
         "DE": {
             score: "0.0%", topAgent: "Pending Agent (0.0%)",
             topQuestions: [ { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" } ],
             bottomQuestion: { q: "Pending", score: "0.0%" },
-            teams: [ { name: "Pending Team", score: "0.0%" } ],
+            teams: [ { name: "Pending Team", score: "0.0%" } ], //Leave empty brackets if no teams available
             trend: [0, 0, 0, 0, 0],
-            qAvg: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 
+            qAvg: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             agents: [ { name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input" } ]
         },
         "BR": {
             score: "0.0%", topAgent: "Pending Agent (0.0%)",
             topQuestions: [ { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" } ],
             bottomQuestion: { q: "Pending", score: "0.0%" },
-            teams: [ { name: "Pending Team", score: "0.0%" } ],
+            teams: [ { name: "Pending Team", score: "0.0%" } ], //Leave empty brackets if no teams available
             trend: [0, 0, 0, 0, 0],
-            qAvg: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 
+            qAvg: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             agents: [ { name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input" } ]
         },
         "CO": {
             score: "0.0%", topAgent: "Pending Agent (0.0%)",
             topQuestions: [ { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" } ],
             bottomQuestion: { q: "Pending", score: "0.0%" },
-            teams: [ { name: "Pending Team", score: "0.0%" } ],
+            teams: [ { name: "Pending Team", score: "0.0%" } ], //Leave empty brackets if no teams available
             trend: [0, 0, 0, 0, 0],
-            qAvg: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 
+            qAvg: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             agents: [ { name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input" } ]
         },
         "MX": {
             score: "0.0%", topAgent: "Pending Agent (0.0%)",
             topQuestions: [ { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" } ],
             bottomQuestion: { q: "Pending", score: "0.0%" },
-            teams: [ { name: "Pending Team", score: "0.0%" } ],
+            teams: [ { name: "Pending Team", score: "0.0%" } ], //Leave empty brackets if no teams available
             trend: [0, 0, 0, 0, 0],
-            qAvg: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], //
+            qAvg: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
             agents: [ { name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input" } ]
         }
     };
@@ -743,7 +765,7 @@ function renderAgents(countryData, teamFilter = "All") {
 
         // KPIs Top Row
         document.getElementById('kpi1-label').innerText = country === "Global" ? "Total Tickets Evaluated" : "Top Performing Agent";
-        document.getElementById('kpi1-value').innerText = country === "Global" ? (db["Global"].tickets || "0") : (country === "IT" ? "Hidden (Privacy)" : data.topAgent);
+        document.getElementById('kpi1-value').innerText = country === "Global" ? (db["Global"].tickets || "0") : (country === "IT" ? "Restricted" : data.topAgent);
         
         document.getElementById('kpi2-value').innerText = data.score;
         
@@ -767,14 +789,24 @@ function renderAgents(countryData, teamFilter = "All") {
         }
 
         // Teams or Agents List
+        const dynContainer = document.getElementById('dynamic-list-container');
         const dynTitle = document.getElementById('dynamic-list-title');
         const dynList = document.getElementById('dynamic-list');
+        
         if (country === "Global") {
+            // Always show Top 5 Agents for Global
+            dynContainer.style.display = "block";
             dynTitle.innerText = "Top 5 Agents Globally";
             dynList.innerHTML = data.topAgents.map(a => `<li><span>${a.name}</span> <span class="score-badge">${a.score}</span></li>`).join('');
         } else {
-            dynTitle.innerText = "Team Breakdown";
-            dynList.innerHTML = data.teams.map(t => `<li><span>${t.name}</span> <span class="score-badge">${t.score}</span></li>`).join('');
+            // Check if the country actually has teams defined
+            if (data.teams && data.teams.length > 0) {
+                dynContainer.style.display = "block"; // Show the 3rd window
+                dynTitle.innerText = "Team Breakdown";
+                dynList.innerHTML = data.teams.map(t => `<li><span>${t.name}</span> <span class="score-badge">${t.score}</span></li>`).join('');
+            } else {
+                dynContainer.style.display = "none"; // Hide the 3rd window, causing the other two to split 50/50
+            }
         }
 
         // --- AUTOMATIC TREND COLOR CALCULATION (Main Chart) ---
@@ -791,11 +823,55 @@ function renderAgents(countryData, teamFilter = "All") {
 
         // Agent Cards
         const agentSection = document.getElementById('agent-section');
+        const agentSectionTitle = document.getElementById('agent-section-title');
+        const agentSectionSubtitle = document.getElementById('agent-section-subtitle');
 
-        if (country === "Global" || country === "IT") {
+        if (country === "Global") {
+            // Hide the whole section for Global
             agentSection.classList.add('hidden');
-        } else {
+            
+        } else if (country === "IT") {
+            // Show special Market Summary for Italy
             agentSection.classList.remove('hidden');
+            document.getElementById('team-filter-wrapper').style.display = 'none'; // Hide team filter
+            
+            // Update Title & Subtitle for Italy's privacy mode
+            agentSectionTitle.innerText = "Market Overview";
+            agentSectionSubtitle.innerText = "Individual agent data and trendlines are hidden to adhere to privacy policies.";
+            
+            const agentGrid = document.getElementById('agent-grid');
+            destroyAgentCharts(); 
+            
+            const strText = data.strength ? data.strength : "Data pending input...";
+            const weakText = data.weakness ? data.weakness : "Data pending input...";
+
+            // Inject a single, permanently open overview card
+            agentGrid.innerHTML = `
+                <div class="agent-card expanded" style="cursor: default;">
+                    <div class="agent-header">
+                        <div class="agent-name">Italy Market Overview</div>
+                        <div class="agent-score">${data.score}</div>
+                    </div>
+                    <div class="agent-details" style="display: block; border-top: none; margin-top: 0; padding-top: 10px;">
+                        <div class="sw-box">
+                            <span class="sw-label strength">Top Market Strength</span>
+                            <div class="sw-text">${strText}</div>
+                        </div>
+                        <div class="sw-box">
+                            <span class="sw-label weakness">Top Market Weakness</span>
+                            <div class="sw-text">${weakText}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+        } else {
+            // Standard behavior for all other countries
+            agentSection.classList.remove('hidden');
+            
+            // Revert Title & Subtitle to standard text
+            agentSectionTitle.innerText = "Agent Performance Breakdown";
+            agentSectionSubtitle.innerText = "Trendlines reflect ISO Week progression (W12-W16). Hover or click to view data values.";
             
             // Target the dropdown and its wrapper
             const teamSelect = document.getElementById('teamFilter');
@@ -810,7 +886,7 @@ function renderAgents(countryData, teamFilter = "All") {
             if (uniqueTeams.length === 0) {
                 teamFilterWrapper.style.display = 'none';
             } else {
-                teamFilterWrapper.style.display = 'block'; // Show it if teams exist
+                teamFilterWrapper.style.display = 'block'; 
                 uniqueTeams.forEach(team => {
                     teamSelect.innerHTML += `<option value="${team}">${team}</option>`;
                 });
