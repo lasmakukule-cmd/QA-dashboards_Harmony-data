@@ -333,25 +333,25 @@ N/A: The call disconnected unexpectedly, the customer hung up prematurely, or th
 
     // Global Q-Trends 
     const qTrends = [
-        [95.8, 95.7, 95.6, 95.3, 96.6], // Q1
-        [7.2, 8.3, 5.6, 6.8, 7.8], // Q2
-        [91.6, 92.2, 90.6, 93.3, 93.1], // Q3
-        [98.3, 98.9, 98.5, 98.3, 98.8], // Q4
-        [85.2, 85.4, 83.9, 87.1, 85.8], // Q5
-        [96.0, 95.7, 95.8, 96.4, 96.2], // Q6 
-        [97.9, 97.9, 96.9, 97.9, 97.8], // Q7 
-        [77.5, 78.3, 76.5, 78.6, 77.9], // Q8
-        [92.8, 92.1, 92.1, 92.5, 92.7], // Q9
-        [82.0, 82.0, 80.7, 82.0, 83.5],  // Q10
-        [44.9, 42.4, 34.9, 44.1, 44.4]  // Q11
+        [95.6, 95.6, 95.4, 95.4, 96.5], // Q1
+        [7.7, 8.7, 5.4, 7.3, 8.0], // Q2
+        [91.7, 92.1, 90.1, 93.2, 93.0], // Q3
+        [98.2, 99.0, 98.5, 98.4, 98.9], // Q4
+        [84.7, 84.6, 84.0, 86.6, 85.8], // Q5
+        [96.1, 95.8, 95.5, 96.0, 96.1], // Q6 
+        [97.7, 97.7, 96.6, 97.8, 97.8], // Q7 
+        [77.7, 77.0, 76.0, 78.1, 77.7], // Q8
+        [92.7, 92.2, 91.8, 92.4, 92.7], // Q9
+        [82.1, 82.2, 80.8, 81.7, 83.8],  // Q10
+        [45.3, 45.4, 35.4, 44.0, 45.0]  // Q11
     ];
     
     // Average scores for each question globally 
-    const scores = [95.8, 7.1, 92.2, 98.6, 85.5, 96.0, 97.7, 77.8, 92.4, 82.1, 41.8]; 
+    const scores = [95.7, 7.4, 92.0, 98.6, 85.2, 95.9, 97.5, 77.3, 92.3, 82.2, 42.7]; 
 
     // Average scores for each country globally 
     const globalCountryLabels = ['PL', 'DE', 'ES', 'MX', 'BR', 'CO', 'IT'];
-    const globalCountryScores = [76.4, 76.5, 81.5, 83.7, 79.5, 86.7, 80.2];
+    const globalCountryScores = [76.4, 76.5, 81.1, 83.8, 78.7, 86.7, 80.2];
 
     // Country Specific Question Trends
     const countryQuestionTrends = {
@@ -369,16 +369,16 @@ N/A: The call disconnected unexpectedly, the customer hung up prematurely, or th
     // Main Dashboard DB
     const db = {
         "Global": {
-            tickets: "8546",
+            tickets: "7341",
             score: "78.8%",
             topCountry: "Colombia (86.7%)",
             topQuestions: [
-                { q: "Q4 Core question", score: "98.6%" }, { q: "Q7 Next steps", score: "97.6%" }, { q: "Q6 Answered all questions", score: "96.0%" }
+                { q: "Q4 Core question", score: "98.6%" }, { q: "Q7 Next steps", score: "97.5%" }, { q: "Q6 Answered all questions", score: "95.9%" }
             ],
             topAgents: [
-                { name: "Yesly Vasquez (CO)", score: "89.7%" }, { name: "Lais Mattuella (BR)", score: "89.6%" }, { name: "Martyna Romanska (PL)", score: "89.4%" }, { name: "Ma Lugo (MX)", score: "87.3%" }, { name: "Maira Gudino (ES)", score: "87.5%" }
+                { name: "Yesly Vasquez (CO)", score: "89.7%" }, { name: "Martyna Romanska (PL)", score: "89.4%" }, { name: "Ma Lugo (MX)", score: "87.7%" }, { name: "Maira Gudino (ES)", score: "87.5%" }, { name: "Kevin Cruz (MX)", score: "87.4%" }
             ],
-            trend: [79.0, 79.0, 77.3, 79.2, 79.6] //
+            trend: [79.0, 79.1, 77.2, 79.1, 79.6] //
         },
         "PL": {
             score: "76.4%", topAgent: "Martyna Romanska (89.4%)",
@@ -388,41 +388,41 @@ N/A: The call disconnected unexpectedly, the customer hung up prematurely, or th
             trend: [75.8, 76.7, 75.2, 77.1, 77.4],
             qAvg: [95.7, 6.2, 90.7, 99.2, 82.4, 96.8, 97.5, 75.0, 92.8, 76.1, 25.8],
             agents: [
-                { name: "Ewelina Czarnecka", score: "84.1%", trend: [null, 86.2, 85.1, 79.1, 86.1], strength: "Professional & empathetic, maintains courteous tone throughout complex permission/legal discussions, asks good clarifying questions", weakness: "Resolution confirmation — ends calls with thanks rather than an explicit check that all issues are resolved", team: "PL CC ENTERPRISE" }, 
-		{ name: "Maciej Bazela", score: "78.4%", trend: [78.1, 76.5, 77.8, 81.8, 77.9], strength: "Pending Input", weakness: "Pending Input", team: "PL CC ENTERPRISE" }, 		
-		{ name: "Marta Kumek", score: "79.0%", trend: [70.4, 74.2, 83.6, 80.1, 86.4], strength: "Excellent call structure — provides clear timelines (15-min follow-up), asks good clarifying questions, and always transitions to the post-call survey", weakness: "Resolution confirmation — plans escalations and follow-ups but does not confirm issue resolution before ending the call", team: "PL CC ENTERPRISE" },  
-		{ name: "Katarzyna Kobryn", score: "80.1%", trend: [80.5, 79.2, 76.7, 81.7, 82.2], strength: "Efficient & confident execution — identifies issues quickly, performs direct profile actions, and provides clear follow-up contact guidance", weakness: "Post-call survey — consistently omits the transition to post-call feedback", team: "PL CC MULTI" }, 
-		{ name: "Maria Misiewicz", score: "83.0%", trend: [86.8, 84.1, 80.1, 83.3, 80.7], strength: "Pending Input", weakness: "Pending Input", team: "PL CC MULTI" }, 		
-		{ name: "Martyna Molak", score: "87.7%", trend: [84.4, 91.6, 87.4, 88.8, 86.1], strength: "Product knowledge & channel routing — correctly identifies the right escalation path and provides actionable next steps for refund cases", weakness: "Active listening & interruptions — explicitly stated 'Będę przerywał' (I will interrupt), and also missed asking clarifying questions; call closure was abrupt", team: "PL CC MULTI" }, 
-		{ name: "Weronika Wojciechowska", score: "79.7%", trend: [79.1, 77.4, 79.4, 80.3, 82.5], strength: "Pending Input", weakness: "Pending Input", team: "PL CC MULTI" }, 
-		{ name: "Jakub Misior", score: "80.3%", trend: [79.6, 81.1, 80.5, 81.1, 79.1], strength: "Empathy & active listening — consistently acknowledges customer situations ('Rozumiem', 'Przepraszam'), avoids interruptions, and asks clarifying questions to resolve notification and calendar issues", weakness: "Call closure & survey — does not provide explicit closure instructions, follow-up next steps, or post-call survey transition", team: "PL CC SOR" }, 
-		{ name: "Joanna Płaskota-Olczyńska", score: "84.5%", trend: [87.4, 86.4, 80.9, null, 83.3], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
-		{ name: "Lukasz Koscielniak", score: "79.2%", trend: [76.5, 73.9, 79.9, 83.7, 82.2], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
-		{ name: "Magda Waszkiewicz", score: "83.6%", trend: [83.1, 81.2, 82.8, 87.7, 83.2], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
+                { name: "Ewelina Czarnecka", score: "84.5%", trend: [null, 86.2, 85.1, 79.1, 86.1], strength: "Professional & empathetic, maintains courteous tone throughout complex permission/legal discussions, asks good clarifying questions", weakness: "Resolution confirmation — ends calls with thanks rather than an explicit check that all issues are resolved", team: "PL CC ENTERPRISE" }, 
+		{ name: "Maciej Bazela", score: "78.1%", trend: [78.1, 76.5, 77.8, 81.8, 77.9], strength: "Pending Input", weakness: "Pending Input", team: "PL CC ENTERPRISE" }, 		
+		{ name: "Marta Kumek", score: "80.1%", trend: [70.4, 74.2, 83.6, 80.1, 86.4], strength: "Excellent call structure — provides clear timelines (15-min follow-up), asks good clarifying questions, and always transitions to the post-call survey", weakness: "Resolution confirmation — plans escalations and follow-ups but does not confirm issue resolution before ending the call", team: "PL CC ENTERPRISE" },  
+		{ name: "Katarzyna Kobryn", score: "80.2%", trend: [80.5, 79.2, 76.7, 81.7, 82.2], strength: "Efficient & confident execution — identifies issues quickly, performs direct profile actions, and provides clear follow-up contact guidance", weakness: "Post-call survey — consistently omits the transition to post-call feedback", team: "PL CC MULTI" }, 
+		{ name: "Maria Misiewicz", score: "82.7%", trend: [86.8, 84.1, 80.1, 83.3, 80.7], strength: "Pending Input", weakness: "Pending Input", team: "PL CC MULTI" }, 		
+		{ name: "Martyna Molak", score: "87.1%", trend: [84.4, 91.6, 87.4, 88.8, 86.1], strength: "Product knowledge & channel routing — correctly identifies the right escalation path and provides actionable next steps for refund cases", weakness: "Active listening & interruptions — explicitly stated 'Będę przerywał' (I will interrupt), and also missed asking clarifying questions; call closure was abrupt", team: "PL CC MULTI" }, 
+		{ name: "Weronika Wojciechowska", score: "79.6%", trend: [79.1, 77.4, 79.4, 80.3, 82.5], strength: "Pending Input", weakness: "Pending Input", team: "PL CC MULTI" }, 
+		{ name: "Jakub Misior", score: "80.2%", trend: [79.6, 81.1, 80.5, 81.1, 79.1], strength: "Empathy & active listening — consistently acknowledges customer situations ('Rozumiem', 'Przepraszam'), avoids interruptions, and asks clarifying questions to resolve notification and calendar issues", weakness: "Call closure & survey — does not provide explicit closure instructions, follow-up next steps, or post-call survey transition", team: "PL CC SOR" }, 
+		{ name: "Joanna Płaskota-Olczyńska", score: "85.1%", trend: [87.4, 86.4, 80.9, null, 83.3], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
+		{ name: "Lukasz Koscielniak", score: "79.1%", trend: [76.5, 73.9, 79.9, 83.7, 82.2], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
+		{ name: "Magda Waszkiewicz", score: "83.0%", trend: [83.1, 81.2, 82.8, 87.7, 83.2], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
 		{ name: "Monika Delazek", score: "85.4%", trend: [null, 85.4, null, null, null], strength: "Pending Input", weakness: "Pending Input", team: "PL CC MULTI" }, 
-		{ name: "Monika Kowalska", score: "83.9%", trend: [null, 81.0, 84.9, null, 85.8], strength: "Pending Input", weakness: "Pending Input", team: "PL CC MULTI" }, 
-		{ name: "Julia Tomaszewska", score: "85.2%", trend: [null, 81.2, 86.4, 90.9, 82.3], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
-		{ name: "Martyna Romanska", score: "89.4%", trend: [null, 89.4, 91.9, 88.4, 87.9], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
-		{ name: "Sirarpi Javakyan", score: "85.0%", trend: [null, null, 85.7, 85.1, 84.1], strength: "Pending Input", weakness: "Pending Input", team: "PL CC ENTERPRISE" }, 
-		{ name: "Sylwia Skora", score: "85.8%", trend: [null, null, 88.6, 85.1, 83.6], strength: "Pending Input", weakness: "Pending Input", team: "PL CC ENTERPRISE" }, 
-		{ name: "Paulina Kos", score: "86.6%", trend: [null, null, 86.5, 87.5, 85.8], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
-		{ name: "Adam Czerniakiewicz", score: "77.6%", trend: [73.8, 78.7, 73.9, 81.0, 80.6], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }, 
-		{ name: "Adrian Piotrowski", score: "73.0%", trend: [75.7, 70.3, 71.1, 77.2, 70.8], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }, 
-		{ name: "Daniel Trojanowski", score: "73.0%", trend: [70.6, 72.9, 72.8, 74.3, 74.5], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }, 
-		{ name: "Joanna Chalupniczak", score: "74.7%", trend: [72.7, 78.6, 75.7, 73.3, 73.4], strength: "Step-by-step guidance & clear communication — walks customers through technical processes (password resets, security settings) with precision and professionalism", weakness: "Empathy & emotional acknowledgment — provides procedural help but does not acknowledge the customer's emotions; also misses the post-call survey", team: "PL MYDR" }, 
-		{ name: "Kacper Ugarenko", score: "72.2%", trend: [71.2, 73.2, 70.6, 71.8, 74.2], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" },
-		{ name: "Karina Ziolkowska", score: "68.4%", trend: [65.7, 70.5, 67.4, 68.0, 70.5], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }, 
+		{ name: "Monika Kowalska", score: "84.5%", trend: [null, 81.0, 84.9, null, 85.8], strength: "Pending Input", weakness: "Pending Input", team: "PL CC MULTI" }, 
+		{ name: "Julia Tomaszewska", score: "82.5%", trend: [null, 81.2, 86.4, 90.9, 82.3], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
+		{ name: "Martyna Romanska", score: "89.3%", trend: [null, 89.4, 91.9, 88.4, 87.9], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
+		{ name: "Sirarpi Javakyan", score: "84.9%", trend: [null, null, 85.7, 85.1, 84.1], strength: "Pending Input", weakness: "Pending Input", team: "PL CC ENTERPRISE" }, 
+		{ name: "Sylwia Skora", score: "85.5%", trend: [null, null, 88.6, 85.1, 83.6], strength: "Pending Input", weakness: "Pending Input", team: "PL CC ENTERPRISE" }, 
+		{ name: "Paulina Kos", score: "86.3%", trend: [null, null, 86.5, 87.5, 85.8], strength: "Pending Input", weakness: "Pending Input", team: "PL CC SOR" }, 
+		{ name: "Adam Czerniakiewicz", score: "77.0%", trend: [73.8, 78.7, 73.9, 81.0, 80.6], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }, 
+		{ name: "Adrian Piotrowski", score: "72.2%", trend: [75.7, 70.3, 71.1, 77.2, 70.8], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }, 
+		{ name: "Daniel Trojanowski", score: "73.3%", trend: [70.6, 72.9, 72.8, 74.3, 74.5], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }, 
+		{ name: "Joanna Chalupniczak", score: "75.0%", trend: [72.7, 78.6, 75.7, 73.3, 73.4], strength: "Step-by-step guidance & clear communication — walks customers through technical processes (password resets, security settings) with precision and professionalism", weakness: "Empathy & emotional acknowledgment — provides procedural help but does not acknowledge the customer's emotions; also misses the post-call survey", team: "PL MYDR" }, 
+		{ name: "Kacper Ugarenko", score: "72.3%", trend: [71.2, 73.2, 70.6, 71.8, 74.2], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" },
+		{ name: "Karina Ziolkowska", score: "68.0%", trend: [65.7, 70.5, 67.4, 68.0, 70.5], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }, 
 		{ name: "Marek Kowalczyk", score: "74.8%", trend: [76.6, 73.9, 74.3, 73.1, 76.1], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }, 
 		{ name: "Natalia Koziol", score: "69.9%", trend: [70.8, 71.0, 68.8, 68.1, 70.6], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }, 
-		{ name: "Marta Krolak", score: "71.6%", trend: [70.3, 70.2, 72.7, 73.0, null], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" },
-		{ name: "Katarzyna Obara-Wrzosek", score: "73.4%", trend: [null, null, 74.9, 75.0, 70.5], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }
+		{ name: "Marta Krolak", score: "71.7%", trend: [70.3, 70.2, 72.7, 73.0, null], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" },
+		{ name: "Katarzyna Obara-Wrzosek", score: "73.7%", trend: [null, null, 74.9, 75.0, 70.5], strength: "Pending Input", weakness: "Pending Input", team: "PL MYDR" }
             ]
         },
         "IT": { 
             score: "80.2%", topAgent: "Hidden", 
             topQuestions: [ { q: "Q4 Core question", score: "99.1%" }, { q: "Q7 Next steps", score: "97.1%" }, { q: "Q6 Answered all questions", score: "96.6%" } ],
             bottomQuestion: { q: "Q3 Confidence", score: "9.5%" },
-            teams: [], 
+            teams: [], //Leave empty brackets if no teams available
             trend: [80.1, 80.4, 80.4, 79.2, 80.5],
             qAvg: [93.8, 9.5, 93.8, 99.1, 75.4, 96.6, 97.1, 70.9, 92.3, 88.9, 64.6],
             strength: "Empathy, apology & customer reassurance — the IT team consistently scores 'Yes' on empathy across agents. Multiple agents explicitly apologize when appropriate, acknowledge customer distress, and use warm language to de-escalate frustrated customers. This is a standout trait compared to other markets.", 
@@ -437,64 +437,87 @@ N/A: The call disconnected unexpectedly, the customer hung up prematurely, or th
             trend: [81.7, 80.1, 81.8, 80.1, 81.9],
             qAvg: [96.4, 5.5, 92.3, 98.1, 89.1, 95.4, 98.0, 76.8, 95.6, 87.5, 57.9],  
             agents: [
-                { name: "Beatriu Gonzalez", score: "82.9%", trend: [82.9, 83.8, 79.7, 82.5, 85.7], strength: "Empathy & escalation — apologises for inconveniences, escalates professionally, and keeps the customer informed throughout", weakness: "Post-call survey transition — not consistently requested, need to focus on asking the customers if all questions have been answered before finalizing the call", team: "ES CC CLOUD SUPPORT" }, 
-		{ name: "Celia Zambrano", score: "78.1%", trend: [80.9, 77.7, 75.9, 74.8, 81.0], strength: "Pending Input", weakness: "Pending Input", team: "ES CC CLOUD SUPPORT" }, 
-		{ name: "Laura Capon", score: "79.2%", trend: [78.1, 80.7, null, 77.3, 80.7], strength: "Full-service troubleshooting — proactively uses screen sharing, tests internally, and offers a concrete workaround; consistently scores 'Yes' on all technical criteria", weakness: "Resolution confirmation — does not explicitly confirm all issues are resolved before closing", team: "ES CC CLOUD SUPPORT" }, 
-		{ name: "Maria Garcia", score: "69.9%", trend: [40.9, 67.4, 81.0, 80.2, 80.2], strength: "Pending Input", weakness: "Pending Input", team: "ES CC CLOUD SUPPORT" }, 
-		{ name: "Melisa Oviedo", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "ES CC CLOUD SUPPORT" }, 
-		{ name: "Silvia Rodriguez", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "ES CC CLOUD SUPPORT" }, 
-		{ name: "Vanessa Isidro", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "ES CC CLOUD SUPPORT" }, 
-		{ name: "Alba Echavarria", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
-		{ name: "Alex Frias", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
-		{ name: "Claudia Bohorquez", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
-		{ name: "Eliana Hernandez", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
-		{ name: "Julie Toledo", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
-		{ name: "Katheryn Arias", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
-		{ name: "Laura Vasquez", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
-		{ name: "Lizandra Valverde", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
-		{ name: "Maira Gudino", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
-		{ name: "Mariela Galeazzi", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
-		{ name: "Patricia Campoblanco", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
-		{ name: "Robert Agenjo", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }, 
-		{ name: "Ruben Pena", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" },
-		{ name: "Victor Fuentes", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input", team: "Pending Input" }
+                { name: "Beatriu Gonzalez", score: "83.2%", trend: [82.9, 83.8, 79.7, 82.5, 85.7], strength: "Empathy & escalation — apologises for inconveniences, escalates professionally, and keeps the customer informed throughout", weakness: "Post-call survey transition — not consistently requested, need to focus on asking the customers if all questions have been answered before finalizing the call", team: "ES CC CLOUD SUPPORT" }, 
+		{ name: "Celia Zambrano", score: "77.5%", trend: [80.9, 77.7, 75.9, 74.8, 81.0], strength: "Pending Input", weakness: "Pending Input", team: "ES CC CLOUD SUPPORT" }, 
+		{ name: "Laura Capon", score: "79.5%", trend: [78.1, 80.7, null, 77.3, 80.7], strength: "Full-service troubleshooting — proactively uses screen sharing, tests internally, and offers a concrete workaround; consistently scores 'Yes' on all technical criteria", weakness: "Resolution confirmation — does not explicitly confirm all issues are resolved before closing", team: "ES CC CLOUD SUPPORT" }, 
+		{ name: "Maria Garcia", score: "75.9%", trend: [40.9, 67.4, 81.0, 80.2, 80.2], strength: "Pending Input", weakness: "Pending Input", team: "ES CC CLOUD SUPPORT" }, 
+		{ name: "Melisa Oviedo", score: "77.9%", trend: [77.2, 78.3, 79.1, 78.4, 76.7], strength: "Pending Input", weakness: "Pending Input", team: "ES CC CLOUD SUPPORT" }, 
+		{ name: "Silvia Rodriguez", score: "83.1%", trend: [86.6, 79.1, 83.0, 82.4, 83.7], strength: "Pending Input", weakness: "Pending Input", team: "ES CC CLOUD SUPPORT" }, 
+		{ name: "Vanessa Isidro", score: "79.5%", trend: [79.0, 79.5, 80.7, 79.1, 79.2], strength: "Pending Input", weakness: "Pending Input", team: "ES CC CLOUD SUPPORT" }, 
+		{ name: "Alba Echavarria", score: "83.4%", trend: [null, 84.7, 87.8, 81.7, 82.4], strength: "Pending Input", weakness: "Pending Input", team: "ES CC SUPPORT" }, 
+		{ name: "Alex Frias", score: "74.0%", trend: [79.5, 77.3, 59.5, 75.7, 74.8], strength: "Pending Input", weakness: "Pending Input", team: "ES CC SUPPORT" }, 
+		{ name: "Claudia Bohorquez", score: "83.9%", trend: [81.7, 85.1, 83.6, 81.8, 86.4], strength: "Pending Input", weakness: "Pending Input", team: "ES CC SUPPORT" }, 
+		{ name: "Eliana Hernandez", score: "83.5%", trend: [null, 85.4, null, 84.0, 80.6], strength: "Pending Input", weakness: "Pending Input", team: "ES CC SUPPORT" }, 
+		{ name: "Julie Toledo", score: "80.8%", trend: [null, 80.8, null, null, null], strength: "Pending Input", weakness: "Pending Input", team: "ES CC SUPPORT" }, 
+		{ name: "Katheryn Arias", score: "85.1%", trend: [84.8, 84.0, 88.0, 83.3, 86.4], strength: "Pending Input", weakness: "Pending Input", team: "ES CC SUPPORT" }, 
+		{ name: "Laura Vasquez", score: "83.3%", trend: [83.5, 83.1, 86.6, 85.4, 80.6], strength: "Pending Input", weakness: "Pending Input", team: "ES CC SUPPORT" }, 
+		{ name: "Lizandra Valverde", score: "81.4%", trend: [81.8, null, null, 81.1, null], strength: "Pending Input", weakness: "Pending Input", team: "ES CC SUPPORT" }, 
+		{ name: "Maira Gudino", score: "87.5%", trend: [87.9, 82.2, 85.3, 90.1, 89.5], strength: "Pending Input", weakness: "Pending Input", team: "ES CC SUPPORT" }, 
+		{ name: "Mariela Galeazzi", score: "81.6%", trend: [81.0, 84.8, null, null, 80.4], strength: "Pending Input", weakness: "Pending Input", team: "ES CC SUPPORT" }, 
+		{ name: "Patricia Campoblanco", score: "76.2%", trend: [60.9, 75.0, 78.8, 73.7, 79.6], strength: "Pending Input", weakness: "Pending Input", team: "ES CC SUPPORT" }, 
+		{ name: "Robert Agenjo", score: "79.5%", trend: [85.0, 76.8, 77.4, 78.4, 78.7], strength: "Pending Input", weakness: "Pending Input", team: "ES CC SUPPORT" }, 
+		{ name: "Ruben Pena", score: "81.8%", trend: [72.7, null, null, 90.9, null], strength: "Pending Input", weakness: "Pending Input", team: "ES CC SUPPORT" },
+		{ name: "Victor Fuentes", score: "84.0%", trend: [86.4, 87.4, 89.9, null, 79.6], strength: "Pending Input", weakness: "Pending Input", team: "ES CC SUPPORT" }
 	]
         },
         "DE": {
-            score: "0.0%", topAgent: "Pending Agent (0.0%)",
-            topQuestions: [ { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" } ],
-            bottomQuestion: { q: "Pending", score: "0.0%" },
-            teams: [ { name: "Pending Team", score: "0.0%" } ], //Leave empty brackets if no teams available
-            trend: [0, 0, 0, 0, 0],
-            qAvg: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            agents: [ { name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input" } ]
+            score: "76.5%", topAgent: "Vivien Lemme (80.0%)",
+            topQuestions: [ { q: "Q7 Next steps", score: "98.3%" }, { q: "Q4 Core question", score: "97.4%" }, { q: "Q1 Active listening", score: "95.3%" } ],
+            bottomQuestion: { q: "Q2 Resolution confirmation", score: "5.6%" },
+            teams: [], //Leave empty brackets if no teams available
+            trend: [78.9, 76.9, 74.9, 77.0, 75.7],
+            qAvg: [95.3, 5.6, 85.0, 97.4, 91.7, 94.4, 98.3, 69.7, 80.2, 85.0, 39.0], 
+            agents: [ 
+		{ name: "Bernadette Dreyer", score: "78.1%", trend: [80.4, 78.7, null, 74.5, 79.0], strength: "Product knowledge & proactive next steps — Consistently scores 'Yes' across all calls for demonstrating confidence in product knowledge and providing concrete, actionable next steps (e.g. ticket creation, SEPA process guidance, webinar links, workarounds for phone number issues).", weakness: "Explicit issue resolution confirmation — Across multiple calls, Bernadette closes the call without explicitly confirming that all of the customer's issues have been fully resolved. She transitions well to closure but misses the final check-in: 'Have we resolved everything for you today?'" }, 
+		{ name: "Jana Hurter", score: "74.8%", trend: [null, null, 73.7, null, 76.5], strength: "Empathy & active listening — Consistently acknowledged customer frustrations, used supportive language, and employed backchanneling to let customers speak fully. Scored 'Yes' on empathy across all analysed calls, even in technically complex situations.", weakness: "Communication professionalism & call interruptions — In at least one call (ID 19150641), Jana was flagged for frequent interruptions, informal phrasing, and run-on sentences — resulting in a 'No' on professional communication." }, 
+		{ name: "Marlene Sroka", score: "77.5%", trend: [76.5, 71.5, null, 81.2, 81.7], strength: "Professional communication & structured troubleshooting — Consistently opens calls with a proper greeting, maintains a professional tone, and walks customers through issues step-by-step with clarity. Scored 'Yes' on professional communication and active listening in all scored calls.", weakness: "Explicit resolution confirmation before closing — Like the team pattern, Marlene consistently doesn't confirm whether all customer issues are resolved before ending the call. She proposes monitoring and follow-up (e.g. 'call us back if it persists') but doesn't close the loop with a direct resolution check-in." }, 
+		{ name: "Scarlett Pigalotta", score: "69.7%", trend: [null, 80.0, 72.0, 72.4, 65.0], strength: "Pending Input", weakness: "Pending Input" }, 
+		{ name: "Vivien Lemme", score: "80.0%", trend: [86.4, 81.5, 80.3, 81.8, 72.7], strength: "Pending Input", weakness: "Pending Input" } ]
         },
         "BR": {
-            score: "0.0%", topAgent: "Pending Agent (0.0%)",
-            topQuestions: [ { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" } ],
-            bottomQuestion: { q: "Pending", score: "0.0%" },
-            teams: [ { name: "Pending Team", score: "0.0%" } ], //Leave empty brackets if no teams available
-            trend: [0, 0, 0, 0, 0],
-            qAvg: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            agents: [ { name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input" } ]
+            score: "78.7%", topAgent: "Lais Mattuella (89.6%)",
+            topQuestions: [ { q: "Q4 Core question", score: "96.7%" }, { q: "Q7 Next steps", score: "96.4%" }, { q: "Q1 Active listening", score: "95.0%" } ],
+            bottomQuestion: { q: "Q2 Resolution confirmation", score: "5.2%" },
+            teams: [], //Leave empty brackets if no teams available
+            trend: [78.6, 81.8, 77.0, 78.3, 78.9],
+            qAvg: [95.0, 5.2, 90.4, 96.7, 89.8, 91.4, 96.4, 81.2, 82.1, 81.8, 60.5],
+            agents: [ 
+		{ name: "Erika Miranda", score: "74.7%", trend: [null, null, null, 76.3, 73.1], strength: "Pending Input", weakness: "Pending Input" }, 
+		{ name: "Joyce Dias", score: "77.7%", trend: [75.4, 81.1, 77.6, 74.7, 80.0], strength: "Pending Input", weakness: "Pending Input" }, 
+		{ name: "Joyce Vianna", score: "80.3%", trend: [81.1, 80.0, 79.8, 83.6, 76.9], strength: "Pending Input", weakness: "Pending Input" }, 
+		{ name: "Luiz Almeida", score: "82.8%", trend: [82.3, 86.5, 79.7, 84.4, 81.2], strength: "Pending Input", weakness: "Pending Input" }, 
+		{ name: "Maria Mauricio", score: "77.6%", trend: [null, null, 77.1, 77.6, 78.0], strength: "Pending Input", weakness: "Pending Input" }, 
+		{ name: "Renan Maia", score: "74.2%", trend: [80.0, 72.3, 74.0, 70.7, 74.1], strength: "Pending Input", weakness: "Pending Input" }, 
+		{ name: "Ueverton Pessanha", score: "79.0%", trend: [71.7, 83.1, 73.6, 79.2, 87.5], strength: "Pending Input", weakness: "Pending Input" } ]
         },
         "CO": {
-            score: "0.0%", topAgent: "Pending Agent (0.0%)",
+            score: "86.7%", topAgent: "Yesly Vasquez (89.7%)",
             topQuestions: [ { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" } ],
             bottomQuestion: { q: "Pending", score: "0.0%" },
-            teams: [ { name: "Pending Team", score: "0.0%" } ], //Leave empty brackets if no teams available
-            trend: [0, 0, 0, 0, 0],
-            qAvg: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            agents: [ { name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input" } ]
+            teams: [], //Leave empty brackets if no teams available
+            trend: [86.4, 85.7, 90.9, 84.1, 90.9],
+            qAvg: [98.0, 10.0, 100.0, 100.0, 93.9, 96.0, 98.0, 92.0, 96.0, 94.0, 76.0], 
+            agents: [ 
+		{ name: "Yesly Vasquez", score: "89.7%", trend: [90.9, 89.1, 90.9, 86.4, 90.9], strength: "Pending Input", weakness: "Pending Input" },
+		{ name: "Liset Rodriguez", score: "83.8%", trend: [85.4, 84.1, null, 78.8, 90.9], strength: "Pending Input", weakness: "Pending Input" },
+		{ name: "Julio Bedon", score: "87.2%", trend: [81.8, 83.6, 90.9, 90.9, 90.9], strength: "Pending Input", weakness: "Pending Input" } ]
         },
         "MX": {
-            score: "0.0%", topAgent: "Pending Agent (0.0%)",
-            topQuestions: [ { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" }, { q: "Pending", score: "0.0%" } ],
-            bottomQuestion: { q: "Pending", score: "0.0%" },
-            teams: [ { name: "Pending Team", score: "0.0%" } ], //Leave empty brackets if no teams available
-            trend: [0, 0, 0, 0, 0],
-            qAvg: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-            agents: [ { name: "Pending Agent", score: "0.0%", trend: [0, 0, 0, 0, 0], strength: "Pending Input", weakness: "Pending Input" } ]
+            score: "83.8%", topAgent: "Ma Lugo (87.7%)",
+            topQuestions: [ { q: "Q4 Core question", score: "98.4%" }, { q: "Q3 Confidence", score: "98.2%" }, { q: "Q1 Active listening", score: "97.6%" } ],
+            bottomQuestion: { q: "Q2 Resolution confirmation", score: "15.8%" },
+            teams: [], //Leave empty brackets if no teams available
+            trend: [84.2, 84.1, 81.5, 83.8, 84.3],
+            qAvg: [97.6, 15.8, 98.2, 98.4, 95.2, 95.9, 97.3, 94.3, 95.4, 85.0, 49.5], 
+            agents: [ 
+		{ name: "Angelica Mejia", score: "84.1%", trend: [88.9, 86.9, 82.8, 80.5, 82.6], strength: "Strong empathy & reassurance — uses warm language ('No se preocupe, estoy aquí con usted') and keeps customers calm while navigating complex situations", weakness: "Resolution confirmation— consistently ends calls without checking if all customers questions have been answered" }, 
+		{ name: "Brandon Quezada", score: "81.7%", trend: [86.5, 82.2, 81.6, 80.6, 78.9], strength: "Pending Input", weakness: "Pending Input" }, 
+		{ name: "Jonathan Sanchez", score: "82.7%", trend: [79.0, 81.4, 86.0, 84.6, 82.9], strength: "Pending Input", weakness: "Pending Input" }, 
+		{ name: "Juan Vergara", score: "78.6%", trend: [79.5, 81.0, 64.3, 75.3, 84.3], strength: "Empathy & accountability — apologises for delays, explains root causes clearly (sync issues), and keeps customer informed with ticket updates", weakness: "Resolution confirmation— consistently ends calls without checking if all customers questions have been answered" }, 
+		{ name: "Kevin Cruz", score: "87.4%", trend: [null, 90.0, 74.0, 88.3, 89.9], strength: "Active product knowledge — provides concrete data export steps, download locations, escalation paths, and follow-up plans", weakness: "Post-call survey not advised to the customers" }, 
+		{ name: "Ma Lugo", score: "87.7%", trend: [88.0, 85.8, 91.7, 87.6, 87.3], strength: "Pending Input", weakness: "Pending Input" }, 
+		{ name: "Mayra Gutierrez", score: "85.8%", trend: [84.6, 87.3, 82.8, 85.8, 88.1], strength: "Pending Input", weakness: "Pending Input" }, 
+		{ name: "Rodrigo Takiguchi", score: "84.2%", trend: [81.4, 83.5, 81.7, 85.8, 86.1], strength: "Pending Input", weakness: "Pending Input" } ]
         }
     };
 
