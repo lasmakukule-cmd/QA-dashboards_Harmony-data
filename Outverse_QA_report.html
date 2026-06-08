@@ -401,6 +401,16 @@ const countryColors = {
 };
 
 // Overall pivot data (not month-filtered)
+// Actual weekly channel performance from pivot table (S85 in spreadsheet)
+// 20 values aligned to the weeks array; null = no data for that week
+const channelWeeklyData = {
+    'Chat':     [null,null,null,54.4,62.0,55.9,50.5,53.1,52.6,64.7,66.5,63.3,64.3,65.4,63.2,72.3,68.0,67.9,67.3,70.2],
+    'Email':    [null,null,null,65.1,70.0,66.1,67.9,68.2,65.1,63.5,69.3,67.1,68.8,58.2,65.5,66.0,52.5,52.7,52.0,64.2],
+    'WhatsApp': [null,null,null,64.5,63.7,57.3,55.9,54.3,58.0,67.7,56.9,62.8,65.5,66.3,62.0,70.8,72.0,72.0,78.9,73.4]
+};
+
+// Overall country×channel averages — used to distribute country monthly avg
+// across channels in the grouped bar chart
 const pivotData = {
     email:    [68.0,62.3,68.4,67.4,67.2,46.8,65.8],
     chat:     [62.0,62.5,54.8,62.8,60.6,64.7,null],
@@ -432,16 +442,12 @@ function getCountryMonthAvg(country, wIdx) {
     return c ? s/c : null;
 }
 
-function getMonthlyChannelEst(wIdx) {
-    // Estimate channel avgs from per-country monthly avgs
-    const coAvg = (cos) => {
-        const v = cos.map(c=>getCountryMonthAvg(c,wIdx)).filter(x=>x!==null);
-        return v.length ? v.reduce((a,b)=>a+b,0)/v.length : null;
-    };
+// Channel monthly averages — now using actual weekly pivot data
+function getMonthlyChannelAvgs(wIdx) {
     return [
-        coAvg(['PL','DE','ES','MX','BR','CO','IT']), // Email (all)
-        coAvg(['PL','DE','ES','MX','BR','CO']),       // Chat (no IT)
-        coAvg(['ES','MX'])                             // WhatsApp
+        mAvg(channelWeeklyData['Email'],    wIdx),
+        mAvg(channelWeeklyData['Chat'],     wIdx),
+        mAvg(channelWeeklyData['WhatsApp'], wIdx)
     ];
 }
 
@@ -482,17 +488,14 @@ const countryChartInst = new Chart(document.getElementById('countryChart').getCo
     options: { responsive:true, maintainAspectRatio:false, scales:{ y:{ beginAtZero:true, max:100 } }, plugins:{ legend:{ display:false }, tooltip:ttFmt } }
 });
 
-// Channel chart (monthly estimate)
+// Channel chart (actual monthly data from pivot table)
 const channelChartInst = new Chart(document.getElementById('channelChart').getContext('2d'), {
     type: 'bar',
     data: { labels:['Email','Chat','WhatsApp'], datasets: [{ label:'Avg Score', data:[0,0,0], backgroundColor:'#2d4059', borderRadius:4, barPercentage:0.6 }] },
     options: { responsive:true, maintainAspectRatio:false, scales:{ y:{ beginAtZero:true, max:100 } }, plugins:{ legend:{ display:false }, tooltip:ttFmt } }
 });
 
-// Overall country averages — used to scale channel ratios for monthly estimates
-const overallCountryAvgs = [65.7, 57.1, 64.7, 64.7, 65.9, 62.0, 65.8];
-
-// Pivot chart (stored so we can update it monthly)
+// Pivot chart — Country × Channel (monthly, updated on filter change)
 const pivotChartInst = new Chart(document.getElementById('pivotChart').getContext('2d'), {
     type:'bar',
     data:{ labels:countryList, datasets:[
@@ -503,19 +506,27 @@ const pivotChartInst = new Chart(document.getElementById('pivotChart').getContex
     options:{ responsive:true, maintainAspectRatio:false, scales:{ y:{ beginAtZero:true, max:100, title:{ display:true, text:'Score (%)' } } }, plugins:{ legend:{ display:true, position:'top' }, tooltip:{ mode:'index', intersect:false, callbacks:{ label: ctx => ctx.parsed.y!==null ? ctx.dataset.label+': '+ctx.parsed.y.toFixed(1)+'%' : null } } } }
 });
 
-// Monthly pivot estimates — scale each country's monthly avg by the known
-// channel-to-overall ratio (e.g. if email historically runs 5 pp above average,
-// assume that ratio holds for the selected month).
+// Overall country averages — used to distribute country monthly avg across channels
+const overallCountryAvgs = [65.7, 57.1, 64.7, 64.7, 65.9, 62.0, 65.8];
+
+// Pivot chart — per country, per channel, per month.
+// Uses actual monthly channel averages (from weekly pivot data) to compute
+// how each channel deviates from the overall that month, then applies that
+// ratio to each country's monthly average.
 function getMonthlyPivotData(weekIndices) {
-    const mCoAvgs = countryList.map(c => getCountryMonthAvg(c, weekIndices));
-    const scale = (mA, channelOverall, countryOverall) => {
-        if (mA === null || channelOverall === null || !countryOverall) return null;
-        return Math.min(100, Math.max(0, mA * (channelOverall / countryOverall)));
+    const mCoAvgs    = countryList.map(c => getCountryMonthAvg(c, weekIndices));
+    const mOverall   = mAvg(globalAvg, weekIndices);
+    const [mEmail, mChat, mWA] = getMonthlyChannelAvgs(weekIndices);
+
+    const scale = (countryAvg, channelMonthlyAvg) => {
+        if (countryAvg === null || channelMonthlyAvg === null || !mOverall) return null;
+        return Math.min(100, Math.max(0, countryAvg * (channelMonthlyAvg / mOverall)));
     };
+
     return {
-        email:    countryList.map((_,i) => scale(mCoAvgs[i], pivotData.email[i],    overallCountryAvgs[i])),
-        chat:     countryList.map((_,i) => scale(mCoAvgs[i], pivotData.chat[i],     overallCountryAvgs[i])),
-        whatsapp: countryList.map((_,i) => scale(mCoAvgs[i], pivotData.whatsapp[i], overallCountryAvgs[i]))
+        email:    countryList.map((_,i) => pivotData.email[i]    !== null ? scale(mCoAvgs[i], mEmail) : null),
+        chat:     countryList.map((_,i) => pivotData.chat[i]     !== null ? scale(mCoAvgs[i], mChat)  : null),
+        whatsapp: countryList.map((_,i) => pivotData.whatsapp[i] !== null ? scale(mCoAvgs[i], mWA)    : null)
     };
 }
 
@@ -533,7 +544,7 @@ function updateDashboard(monthIndex) {
     const pScores  = pW ? getMonthlyQScores(pW) : null;
     const mOverall = getMonthlyOverall(mW);
     const mCountry = countryList.map(c => getCountryMonthAvg(c, mW));
-    const mChannel = getMonthlyChannelEst(mW);
+    const mChannel = getMonthlyChannelAvgs(mW);
     const mPivot   = getMonthlyPivotData(mW);
 
     // Best / Worst question
@@ -570,8 +581,8 @@ function updateDashboard(monthIndex) {
     const metaStr = `Showing data for ${m.label}`;
     document.getElementById('barChartMeta').innerText     = metaStr;
     document.getElementById('countryChartMeta').innerText = metaStr;
-    document.getElementById('channelChartMeta').innerText = metaStr+' — estimated from country-level data';
-    document.getElementById('pivotChartMeta').innerText   = metaStr+' — channel values estimated from historical channel ratios per country';
+    document.getElementById('channelChartMeta').innerText   = metaStr+' — actual data from weekly channel pivot';
+    document.getElementById('pivotChartMeta').innerText     = metaStr+' — channel values derived from actual monthly channel averages, distributed per country';
 
     // Filter note
     const filterNote = document.getElementById('filterNote');
